@@ -65,8 +65,9 @@ variable "wait_time" {
 }
 
 variable "lacework_integration_name" {
-  type    = string
-  default = "TF activity log"
+  type        = string
+  default     = "TF activity log"
+  description = "The Lacework integration name"
 }
 
 variable "use_existing_ad_application" {
