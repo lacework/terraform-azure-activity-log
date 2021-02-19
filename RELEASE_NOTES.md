@@ -1,8 +1,7 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v0.1.2`.
+Another day, another release. These are the release notes for the version `v0.1.3`.
 
-## Bug Fixes
-* fix: specify correct version constraints (Salim Afiune Maya)([5d0d1bc](https://github.com/lacework/terraform-azure-activity-log/commit/5d0d1bc6109e62e0f2b1a3e666fca12bf9a3cbd0))
+## Documentation Updates
+* docs: Update all examples with README files (#6) (Scott Ford)([32775ac](https://github.com/lacework/terraform-azure-activity-log/commit/32775ac4ab60c7650707e7526893a302c06656e5))
 ## Other Changes
-* chore: update variable descriptions (Salim Afiune Maya)([5a31b99](https://github.com/lacework/terraform-azure-activity-log/commit/5a31b99fbf1938e0d6915f4f50bdf5b66457c4c9))
-* ci: update release notes generation (Salim Afiune Maya)([519085c](https://github.com/lacework/terraform-azure-activity-log/commit/519085c3299f9cdc3c02339c07efef1f391f59d7))
+* ci: send slack notifications to team alias ⭐ (#5) (Salim Afiune)([ab90f8d](https://github.com/lacework/terraform-azure-activity-log/commit/ab90f8d4640a12effb359298638cfba271d93245))
