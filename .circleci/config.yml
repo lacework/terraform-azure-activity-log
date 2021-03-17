@@ -54,7 +54,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "04:ea:9d:e5:99:37:e5:c9:0e:23:e1:46:6d:a8:e2:38"
+            - "1f:ab:a5:38:bc:dc:e5:b8:c9:63:6f:c9:47:ca:9f:62"
       - run: scripts/release.sh trigger
   release:
     executor: alpine
