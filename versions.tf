@@ -7,7 +7,7 @@ terraform {
     random  = ">= 2.1"
     lacework = {
       source  = "lacework/lacework"
-      version = "~> 0.2.0"
+      version = "~> 0.3"
     }
   }
 }
