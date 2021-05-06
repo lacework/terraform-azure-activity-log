@@ -1,7 +1,7 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v0.1.3`.
+Another day, another release. These are the release notes for the version `v0.1.4`.
 
-## Documentation Updates
-* docs: Update all examples with README files (#6) (Scott Ford)([32775ac](https://github.com/lacework/terraform-azure-activity-log/commit/32775ac4ab60c7650707e7526893a302c06656e5))
 ## Other Changes
-* ci: send slack notifications to team alias ⭐ (#5) (Salim Afiune)([ab90f8d](https://github.com/lacework/terraform-azure-activity-log/commit/ab90f8d4640a12effb359298638cfba271d93245))
+* ci: fix finding major versions during release (#10) (Salim Afiune)([d0457ae](https://github.com/lacework/terraform-azure-activity-log/commit/d0457ae443d5d9f49d565ff6f6d89bd8017ec7fb))
+* ci: switch PR test from CircleCI to CodeFresh (#9) (Darren)([7ba5843](https://github.com/lacework/terraform-azure-activity-log/commit/7ba58430930e961ed50dd1fe499aec634f36d7d4))
+* ci: switch releases to be own by Lacework releng ⚡ (#8) (Salim Afiune)([55b6cb9](https://github.com/lacework/terraform-azure-activity-log/commit/55b6cb9f81aa196e87cb172ce038215540a87d98))
