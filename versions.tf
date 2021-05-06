@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.12.0"
+  required_version = ">= 0.12.31"
 
   required_providers {
     azuread = ">= 0.11"
@@ -7,7 +7,7 @@ terraform {
     random  = ">= 2.1"
     lacework = {
       source  = "lacework/lacework"
-      version = "~> 0.2.0"
+      version = "~> 0.3"
     }
   }
 }
