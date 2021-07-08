@@ -141,3 +141,33 @@ variable "log_profile_locations" {
     "global"
   ]
 }
+
+variable "log_profile_name" {
+  type        = string
+  default     = ""
+  description = "The name of the Log Profile"
+}
+
+variable "storage_account_name" {
+  type        = string
+  default     = ""
+  description = "The name of the Storage Account"
+}
+
+variable "storage_account_resource_group" {
+  type        = string
+  default     = ""
+  description = "The Resource Group for the existing Storage Account"
+}
+
+variable "use_existing_log_profile" {
+  type        = bool
+  default     = false
+  description = "Set this to `true` to use an existing Log Profile. Default behavior creates a new Log Profile"
+}
+
+variable "use_existing_storage_account" {
+  type        = bool
+  default     = false
+  description = "Set this to `true` to use an existing Storage Account. Default behavior creates a new Storage Account"
+}
