@@ -1,5 +1,8 @@
 # Integrate Azure with Lacework for Activity Log Analysis with Default Settings
+
 The following example integrates an Azure tenant and the default subscription with Lacework for Activity Log analysis using default values.
+
+## Sample Code
 
 ```hcl
 provider "azuread" {}
@@ -12,7 +15,7 @@ provider "lacework" {}
 
 module "az_activity_log" {
   source  = "lacework/activity-log/azure"
-  version = "~> 0.1.2"
+  version = "~> 0.1"
 }
 ```
 
