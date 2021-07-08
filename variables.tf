@@ -1,6 +1,6 @@
 variable "location" {
   type        = string
-  description = "The Azure Region in which all resources in this example should be created."
+  description = "The Azure Region in which all resources should be created"
   default     = "West US 2"
 }
 
@@ -10,13 +10,13 @@ variable "location" {
 variable "prefix" {
   type        = string
   default     = "lacework"
-  description = "The prefix that will be use at the beginning of every generated resource"
+  description = "The prefix to use at the beginning of every generated resource"
 }
 
 variable "application_name" {
   type        = string
   default     = "lacework_security_audit"
-  description = "The name of the Azure Active Directory Applicaiton"
+  description = "The name of the Azure Active Directory Application"
 }
 
 # TODO @afiune do we need this?
@@ -28,14 +28,14 @@ variable "application_identifier_uris" {
 
 variable "subscription_ids" {
   type        = list(string)
-  description = "List of subscriptions to grant read access to, by default the module will only use the primary subscription"
+  description = "List of subscriptions to grant read access to (by default the module will only use the primary subscription)"
   default     = []
 }
 
 variable "all_subscriptions" {
   type        = bool
   default     = false
-  description = "If set to true, grant read access to ALL subscriptions within the selected Tenant (overrides 'subscription_ids')"
+  description = "If set to `true`, grant read access to ALL subscriptions within the selected Tenant (overrides `subscription_ids`)"
 }
 
 # If some of the subscriptions use Key Vault services, we need to the
@@ -73,25 +73,25 @@ variable "lacework_integration_name" {
 variable "use_existing_ad_application" {
   type        = bool
   default     = false
-  description = "Set this to true to use an existing Active Directory Application"
+  description = "Set this to `true` to use an existing Active Directory Application"
 }
 
 variable "application_id" {
   type        = string
   default     = ""
-  description = "The Active Directory Application id to use (required when use_existing_ad_application is set to true)"
+  description = "The Active Directory Application id to use. Required when `use_existing_ad_application` is set to `true`"
 }
 
 variable "application_password" {
   type        = string
   default     = ""
-  description = "The Active Directory Application password to use (required when use_existing_ad_application is set to true)"
+  description = "The Active Directory Application password to use. Required when `use_existing_ad_application` is set to `true`"
 }
 
 variable "service_principal_id" {
   type        = string
   default     = ""
-  description = "The Service Principal id to use (required when use_existing_ad_application is set to true)"
+  description = "The Service Principal id to use. Required when `use_existing_ad_application` is set to `true`"
 }
 
 variable "log_profile_locations" {
@@ -140,4 +140,34 @@ variable "log_profile_locations" {
     "norwayeast",
     "global"
   ]
+}
+
+variable "log_profile_name" {
+  type        = string
+  default     = ""
+  description = "The name of the Log Profile"
+}
+
+variable "storage_account_name" {
+  type        = string
+  default     = ""
+  description = "The name of the Storage Account"
+}
+
+variable "storage_account_resource_group" {
+  type        = string
+  default     = ""
+  description = "The Resource Group for the existing Storage Account"
+}
+
+variable "use_existing_log_profile" {
+  type        = bool
+  default     = false
+  description = "Set this to `true` to use an existing Log Profile. Default behavior creates a new Log Profile"
+}
+
+variable "use_existing_storage_account" {
+  type        = bool
+  default     = false
+  description = "Set this to `true` to use an existing Storage Account. Default behavior creates a new Storage Account"
 }
