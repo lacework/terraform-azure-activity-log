@@ -1,7 +1,7 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v0.2.0`.
+Another day, another release. These are the release notes for the version `v0.2.1`.
 
-## Features
-* feat: added ability to use existing infrastructure (#14) (Alan Nix)([9366258](https://github.com/lacework/terraform-azure-activity-log/commit/93662581e6950b8769f3c7a2cf4100359bbe5e32))
+## Bug Fixes
+* fix: corrected azure provider version constraints (#16) (Alan Nix)([678ec95](https://github.com/lacework/terraform-azure-activity-log/commit/678ec957be15d9bbc4487db2e5569aa105815fdd))
 ## Other Changes
-* chore: version bump to v0.1.5-dev (Lacework)([b3a9db4](https://github.com/lacework/terraform-azure-activity-log/commit/b3a9db4e6ce9850183be55313d620970b9554fee))
+* chore: version bump to v0.2.1-dev (Lacework)([d1e27ba](https://github.com/lacework/terraform-azure-activity-log/commit/d1e27baced470b57f3cb14586f292f8feeeb3a44))
