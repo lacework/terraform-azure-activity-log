@@ -125,7 +125,7 @@ resource "azurerm_role_definition" "lacework" {
 }
 
 resource "azurerm_role_assignment" "lacework" {
-  role_definition_id = azurerm_role_definition.lacework.id
+  role_definition_id = azurerm_role_definition.lacework.role_definition_resource_id
   principal_id       = local.service_principal_id
   scope              = data.azurerm_subscription.primary.id
 }
