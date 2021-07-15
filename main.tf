@@ -100,7 +100,7 @@ data "azurerm_subscription" "primary" {}
 resource "azurerm_role_definition" "lacework" {
   name        = "${var.prefix}-role-${random_id.uniq.hex}"
   description = "Used by Lacework to monitor Activity Logs"
-  scope       = data.azurerm_subscription.primary.id
+  scope       = "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group}"
 
   assignable_scopes = [
     "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group}"
