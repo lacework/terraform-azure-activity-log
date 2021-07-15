@@ -103,7 +103,7 @@ resource "azurerm_role_definition" "lacework" {
   scope       = data.azurerm_subscription.primary.id
 
   assignable_scopes = [
-    data.azurerm_subscription.primary.id
+    "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group}"
   ]
 
   permissions {
