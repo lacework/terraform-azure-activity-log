@@ -100,10 +100,10 @@ data "azurerm_subscription" "primary" {}
 resource "azurerm_role_definition" "lacework" {
   name        = "${var.prefix}-role-${random_id.uniq.hex}"
   description = "Used by Lacework to monitor Activity Logs"
-  scope       = data.azurerm_subscription.primary.id
+  scope       = "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group}"
 
   assignable_scopes = [
-    data.azurerm_subscription.primary.id
+    "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group}"
   ]
 
   permissions {
@@ -127,7 +127,7 @@ resource "azurerm_role_definition" "lacework" {
 resource "azurerm_role_assignment" "lacework" {
   role_definition_id = azurerm_role_definition.lacework.role_definition_resource_id
   principal_id       = local.service_principal_id
-  scope              = data.azurerm_subscription.primary.id
+  scope              = "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group}"
 }
 
 # wait for X seconds for the Azure resources to be created
