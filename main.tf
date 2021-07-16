@@ -100,7 +100,7 @@ data "azurerm_role_definition" "queue_processor" {
 }
 
 resource "azurerm_role_assignment" "lacework" {
-  role_definition_id = data.azurerm_role_definition.queue_processor.id
+  role_definition_id = data.azurerm_role_definition.queue_processor.role_definition_id
   principal_id       = local.service_principal_id
   scope              = local.storage_account_id
 }
