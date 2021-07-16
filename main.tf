@@ -31,6 +31,7 @@ resource "azurerm_resource_group" "lacework" {
   count    = var.use_existing_storage_account ? 0 : 1
   name     = "${var.prefix}-group-${random_id.uniq.hex}"
   location = var.location
+  tags     = var.tags
 }
 
 # NOTE: storage name can only consist of lowercase letters and numbers,
@@ -51,6 +52,7 @@ resource "azurerm_storage_account" "lacework" {
   location                  = var.location
   resource_group_name       = azurerm_resource_group.lacework[0].name
   #enable_blob_encryption    = true
+  tags                      = azurerm_resource_group.lacework[0].tags
 }
 
 resource "azurerm_storage_queue" "lacework" {
