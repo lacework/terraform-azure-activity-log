@@ -171,3 +171,9 @@ variable "use_existing_storage_account" {
   default     = false
   description = "Set this to `true` to use an existing Storage Account. Default behavior creates a new Storage Account"
 }
+
+variable "tags" {
+  type = map(string)
+  default = {}
+  description = "Key-value map of Tag names and Tag values"
+}
