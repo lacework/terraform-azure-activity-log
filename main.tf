@@ -95,39 +95,14 @@ resource "azurerm_monitor_log_profile" "lacework" {
   }
 }
 
-# TODO @afiune maybe we could add a subscription_id variable
-data "azurerm_subscription" "primary" {}
-resource "azurerm_role_definition" "lacework" {
-  name        = "${var.prefix}-role-${random_id.uniq.hex}"
-  description = "Used by Lacework to monitor Activity Logs"
-  scope       = data.azurerm_subscription.primary.id
-
-  assignable_scopes = [
-    data.azurerm_subscription.primary.id
-  ]
-
-  permissions {
-    actions = [
-      "Microsoft.Resources/subscriptions/resourceGroups/read",
-      "Microsoft.Storage/storageAccounts/read",
-      "Microsoft.Storage/storageAccounts/blobServices/containers/read",
-      "Microsoft.Storage/storageAccounts/queueServices/queues/read",
-      "Microsoft.EventGrid/eventSubscriptions/read",
-      "Microsoft.Storage/storageAccounts/listkeys/action"
-    ]
-
-    data_actions = [
-      "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read",
-      "Microsoft.Storage/storageAccounts/queueServices/queues/messages/read",
-      "Microsoft.Storage/storageAccounts/queueServices/queues/messages/delete"
-    ]
-  }
+data "azurerm_role_definition" "queue_processor" {
+  name = "Storage Queue Data Message Processor"
 }
 
 resource "azurerm_role_assignment" "lacework" {
-  role_definition_id = azurerm_role_definition.lacework.role_definition_resource_id
+  role_definition_id = data.azurerm_role_definition.queue_processor.name
   principal_id       = local.service_principal_id
-  scope              = data.azurerm_subscription.primary.id
+  scope              = local.storage_account_id
 }
 
 # wait for X seconds for the Azure resources to be created
