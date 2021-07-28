@@ -1,9 +1,7 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v0.3.0`.
+Another day, another release. These are the release notes for the version `v0.3.1`.
 
-## Features
-* feat: add support for resource tags (#23) (Tomáš Bohuněk)([106103e](https://github.com/lacework/terraform-azure-activity-log/commit/106103efbd6b7576a26c46534f40b9864611d1f2))
-## Refactor
-* refactor: reduce permissions needed for Audit Log integration (#22) (Marcos Garcia)([a0ed59a](https://github.com/lacework/terraform-azure-activity-log/commit/a0ed59a7642b73bd3b48d9cde28ea2147956441a))
+## Bug Fixes
+* fix(deps): upgrade min azurerm version to ~> 2.28 (#27) (Salim Afiune)([cb060c3](https://github.com/lacework/terraform-azure-activity-log/commit/cb060c3256605fab330f2adc4f4ce9c5951a2844))
 ## Other Changes
-* chore: version bump to v0.2.3-dev (Lacework)([770104f](https://github.com/lacework/terraform-azure-activity-log/commit/770104fc24c6da1567fd3090a9c934be1324eb60))
+* chore: version bump to v0.3.1-dev (Lacework)([ce51128](https://github.com/lacework/terraform-azure-activity-log/commit/ce51128d1887c943cdfe135e952b9aaa39d1c680))
