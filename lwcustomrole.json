@@ -1,0 +1,21 @@
+{
+  "Name":  "Lacework-AuditLog-Reader",
+  "IsCustom":  true,
+  "Description":  "Monitors Activity Log",
+  "Actions": [
+  "Microsoft.Resources/subscriptions/resourceGroups/read",
+     "Microsoft.Storage/storageAccounts/read",
+     "Microsoft.Storage/storageAccounts/blobServices/containers/read",
+     "Microsoft.Storage/storageAccounts/queueServices/queues/read",
+     "Microsoft.EventGrid/eventSubscriptions/read",
+     "Microsoft.Storage/storageAccounts/listkeys/action"
+  ],
+  "DataActions": [
+     "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read",
+     "Microsoft.Storage/storageAccounts/queueServices/queues/messages/read",
+     "Microsoft.Storage/storageAccounts/queueServices/queues/messages/delete"
+  ],
+  "AssignableScopes": [
+     "YOURSCOPEID"
+  ]
+}
