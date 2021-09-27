@@ -60,7 +60,7 @@ variable "password_length" {
 
 variable "wait_time" {
   type        = string
-  default     = "10s"
+  default     = "20s"
   description = "Amount of time to wait before the Lacework resources are provisioned"
 }
 
