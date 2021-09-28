@@ -57,7 +57,7 @@ resource "azurerm_storage_account" "lacework" {
 
 resource "azurerm_storage_queue" "lacework" {
   name                 = "${var.prefix}-queue-${random_id.uniq.hex}"
-  storage_account_name = local.storage_account_name
+  storage_account_name = azurerm_storage_account.lacework[0].name
 }
 
 resource "azurerm_eventgrid_event_subscription" "lacework" {
