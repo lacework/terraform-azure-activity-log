@@ -51,13 +51,17 @@ resource "azurerm_storage_account" "lacework" {
   enable_https_traffic_only = true
   location                  = var.location
   resource_group_name       = azurerm_resource_group.lacework[0].name
-  #enable_blob_encryption    = true
   tags                      = azurerm_resource_group.lacework[0].tags
+  #enable_blob_encryption    = true
 }
 
 resource "azurerm_storage_queue" "lacework" {
-  name                 = "${var.prefix}-queue-${random_id.uniq.hex}"
-  storage_account_name = local.storage_account_name
+  name = "${var.prefix}-queue-${random_id.uniq.hex}"
+  storage_account_name = var.use_existing_storage_account ? (
+    data.azurerm_storage_account.lacework[0].name
+    ) : (
+    azurerm_storage_account.lacework[0].name
+  )
 }
 
 resource "azurerm_eventgrid_event_subscription" "lacework" {
