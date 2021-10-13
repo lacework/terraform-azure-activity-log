@@ -140,6 +140,18 @@ resource "azurerm_monitor_diagnostic_setting" "lacework" {
     category = "ResourceHealth"
     enabled  = true
   }
+  log {
+    category = "Autoscale"
+    enabled  = false
+  }
+  log {
+    category = "Recommendation"
+    enabled  = false
+  }
+  log {
+    category = "ServiceHealth"
+    enabled  = false
+  }
 }
 
 #we take the current AZ CLI context's subscription as the placeholder for the centralized storage account
