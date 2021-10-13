@@ -11,7 +11,12 @@ output "application_id" {
 
 output "log_profile_name" {
   value       = local.log_profile_name
-  description = "The name of the Log Profile for Activity Logs"
+  description = "[DEPRECATED] The name of the Log Profile for Activity Logs"
+}
+
+output "diagnostic_settings_name" {
+  value       = var.diagnostic_settings_name
+  description = "[DEPRECATED] The name of the subscription's Diagnostic Setting for Activity Logs"
 }
 
 output "service_principal_id" {

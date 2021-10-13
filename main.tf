@@ -8,6 +8,13 @@ locals {
     length(var.storage_account_name) > 0 ? var.storage_account_name : substr("${var.prefix}storage${random_id.uniq.hex}", 0, 24)
   )
   storage_account_resource_group = var.use_existing_storage_account ? data.azurerm_storage_account.lacework[0].resource_group_name : azurerm_resource_group.lacework[0].name
+  subscription_ids = var.all_subscriptions ? (
+    // the user wants to grant access to all subscriptions
+    [for s in data.azurerm_subscriptions.available.subscriptions : s.subscription_id]
+    ) : (
+    // or, if the user wants to grant a list of subscriptions, if none then we default to the primary subscription
+    length(var.subscription_ids) > 0 ? var.subscription_ids : [data.azurerm_subscription.primary.subscription_id]
+  )
 }
 
 resource "random_id" "uniq" {
@@ -15,7 +22,8 @@ resource "random_id" "uniq" {
 }
 
 module "az_al_ad_application" {
-  source                      = "lacework/ad-application/azure"
+  #source                      = "lacework/ad-application/azure"
+  source  = "/Users/marc/Code/terraform-azure-ad-application"
   #version                     = "~> 0.1"
   create                      = var.use_existing_ad_application ? false : true
   application_name            = var.application_name
@@ -74,7 +82,8 @@ resource "azurerm_eventgrid_event_subscription" "lacework" {
   }
 
   subject_filter {
-    subject_begins_with = "/blobServices/default/containers/insights-operational-logs/"
+    subject_begins_with = "/blobServices/default/containers/insights"
+    #this works with both Log Exports (container name is insights-operational-logs) and Diagnostic Settings (insights-activity-logs)
   }
 
   included_event_types = [
@@ -82,27 +91,81 @@ resource "azurerm_eventgrid_event_subscription" "lacework" {
   ]
 }
 
-resource "azurerm_monitor_log_profile" "lacework" {
-  count              = var.use_existing_log_profile ? 0 : 1
-  name               = local.log_profile_name
-  locations          = var.log_profile_locations
-  storage_account_id = azurerm_storage_account.lacework[0].id
+# resource "azurerm_monitor_log_profile" "lacework" {
+#   count              = var.use_existing_log_profile ? 0 : 1
+#   name               = local.log_profile_name
+#   locations          = var.log_profile_locations
+#   storage_account_id = azurerm_storage_account.lacework[0].id
 
-  categories = [
-    "Action",
-    "Delete",
-    "Write",
-  ]
+#   categories = [
+#     "Action",
+#     "Delete",
+#     "Write",
+#   ]
 
-  # TODO @afiune customize these settings
-  retention_policy {
-    enabled = true
-    days    = 7
+#   # TODO @afiune customize these settings
+#   retention_policy {
+#     enabled = true
+#     days    = 7
+#   }
+# }
+
+
+data "azurerm_subscriptions" "available" {}
+
+#create Diag Settings on all subscriptions requested by user, centralizing logs in single storage
+resource "azurerm_monitor_diagnostic_setting" "lacework" {
+  name  = var.diagnostic_settings_name #TODO: don't re-use log-profile name for diag-settings name
+  count = length(local.subscription_ids)
+  target_resource_id = "/subscriptions/${local.subscription_ids[count.index]}"
+  storage_account_id = local.storage_account_id
+
+  log {
+    category = "Administrative"
+    enabled  = true
+    retention_policy {
+      enabled = true
+      days = 7
+    }
+  } 
+  log {
+    category = "Security"
+    enabled  = true
+    retention_policy {
+      enabled = true
+      days = 7
+    }
+  }
+  log {
+    category = "Alert"
+    enabled  = true
+    retention_policy {
+      enabled = true
+      days = 7
+    }
+  }
+  log {
+    category = "Policy"
+    enabled  = true
+    retention_policy {
+      enabled = true
+      days = 7
+    }
+  }
+  log {
+    category = "ResourceHealth"
+    enabled  = true
+    retention_policy {
+      enabled = true
+      days = 7
+    }
   }
 }
 
-# TODO @afiune maybe we could add a subscription_id variable
+#we take the current AZ CLI context's subscription as the placeholder for the centralized storage account
 data "azurerm_subscription" "primary" {}
+
+#centralized storage account, we only need a single role to read from a single storage account
 resource "azurerm_role_definition" "lacework" {
   name        = "${var.prefix}-role-${random_id.uniq.hex}"
   description = "Used by Lacework to monitor Activity Logs"
@@ -141,18 +204,17 @@ resource "time_sleep" "wait_time" {
   create_duration = var.wait_time
   depends_on = [
     azurerm_eventgrid_event_subscription.lacework,
-    azurerm_monitor_log_profile.lacework,
-    azurerm_role_assignment.lacework,
-    module.az_al_ad_application
+    azurerm_storage_queue.lacework,
+    azurerm_role_assignment.lacework
   ]
 }
 
 resource "lacework_integration_azure_al" "default" {
   name      = var.lacework_integration_name
-  tenant_id = module.az_al_ad_application.tenant_id
+  tenant_id = lower(module.az_al_ad_application.tenant_id) #TO-DO: use local or vars
   queue_url = "https://${local.storage_account_name}.queue.core.windows.net/${azurerm_storage_queue.lacework.name}"
   credentials {
-    client_id     = local.application_id
+    client_id     = lower(local.application_id)
     client_secret = local.application_password
   }
   depends_on = [time_sleep.wait_time]

@@ -142,10 +142,16 @@ variable "log_profile_locations" {
   ]
 }
 
+variable "diagnostic_settings_name" {
+  type        = string
+  default     = "Lacework Activity Logs"
+  description = "The name of the subscription's Diagnostic Setting for Activity Logs"
+}
+
 variable "log_profile_name" {
   type        = string
   default     = ""
-  description = "The name of the Log Profile"
+  description = "[DEPRECATED] The name of the Log Profile"
 }
 
 variable "storage_account_name" {
@@ -162,8 +168,8 @@ variable "storage_account_resource_group" {
 
 variable "use_existing_log_profile" {
   type        = bool
-  default     = false
-  description = "Set this to `true` to use an existing Log Profile. Default behavior creates a new Log Profile"
+  default     = true
+  description = "[DEPRECATED] Set this to `true` to use an existing Log Profile. Default behavior creates a new Log Profile"
 }
 
 variable "use_existing_storage_account" {
