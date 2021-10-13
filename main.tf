@@ -123,42 +123,22 @@ resource "azurerm_monitor_diagnostic_setting" "lacework" {
   log {
     category = "Administrative"
     enabled  = true
-    retention_policy {
-      enabled = true
-      days = 7
-    }
   } 
   log {
     category = "Security"
     enabled  = true
-    retention_policy {
-      enabled = true
-      days = 7
-    }
   }
   log {
     category = "Alert"
     enabled  = true
-    retention_policy {
-      enabled = true
-      days = 7
-    }
   }
   log {
     category = "Policy"
     enabled  = true
-    retention_policy {
-      enabled = true
-      days = 7
-    }
   }
   log {
     category = "ResourceHealth"
     enabled  = true
-    retention_policy {
-      enabled = true
-      days = 7
-    }
   }
 }
 
