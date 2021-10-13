@@ -12,18 +12,28 @@ variable "prefix" {
   default     = "lacework"
   description = "The prefix to use at the beginning of every generated resource"
 }
-
-variable "application_name" {
+variable "application_id" {
   type        = string
-  default     = "lacework_security_audit"
-  description = "The name of the Azure Active Directory Application"
+  default     = ""
+  description = "The Active Directory Application id to use"
 }
 
-# TODO @afiune do we need this?
-variable "application_identifier_uris" {
-  type        = list(string)
-  description = "A list of user-defined URI(s) for the Lacework AD Application"
-  default     = []
+variable "service_principal_id" {
+  type        = string
+  default     = ""
+  description = "The Service Principal id to use"
+}
+
+variable "application_password" {
+  type        = string
+  default     = ""
+  description = "The Active Directory Application password to use"
+}
+
+variable "tenant_id" {
+  type        = string
+  default     = ""
+  description = "A Tenant ID different from the default defined inside the provider"
 }
 
 variable "subscription_ids" {
@@ -38,26 +48,6 @@ variable "all_subscriptions" {
   description = "If set to `true`, grant read access to ALL subscriptions within the selected Tenant (overrides `subscription_ids`)"
 }
 
-# If some of the subscriptions use Key Vault services, we need to the
-# Azure App to have access to each Key Vault used in your subscriptions.
-variable "key_vault_ids" {
-  type        = list(string)
-  description = "A list of Key Vault Ids used in your subscription for the Lacework AD App to have access to"
-  default     = []
-}
-
-variable "tenant_id" {
-  type        = string
-  default     = ""
-  description = "A Tenant ID different from the default defined inside the provider"
-}
-
-variable "password_length" {
-  type        = number
-  default     = 30
-  description = "The length of the Lacework AD Application password"
-}
-
 variable "wait_time" {
   type        = string
   default     = "20s"
@@ -70,88 +60,10 @@ variable "lacework_integration_name" {
   description = "The Lacework integration name"
 }
 
-variable "use_existing_ad_application" {
-  type        = bool
-  default     = false
-  description = "Set this to `true` to use an existing Active Directory Application"
-}
-
-variable "application_id" {
-  type        = string
-  default     = ""
-  description = "The Active Directory Application id to use. Required when `use_existing_ad_application` is set to `true`"
-}
-
-variable "application_password" {
-  type        = string
-  default     = ""
-  description = "The Active Directory Application password to use. Required when `use_existing_ad_application` is set to `true`"
-}
-
-variable "service_principal_id" {
-  type        = string
-  default     = ""
-  description = "The Service Principal id to use. Required when `use_existing_ad_application` is set to `true`"
-}
-
-variable "log_profile_locations" {
-  type        = list(string)
-  description = "List of regions for which Activity Log events are stored or streamed"
-  default = [
-    "eastasia",
-    "southeastasia",
-    "centralus",
-    "eastus",
-    "eastus2",
-    "westus",
-    "northcentralus",
-    "southcentralus",
-    "northeurope",
-    "westeurope",
-    "japanwest",
-    "japaneast",
-    "brazilsouth",
-    "australiaeast",
-    "australiasoutheast",
-    "southindia",
-    "centralindia",
-    "westindia",
-    "canadacentral",
-    "canadaeast",
-    "uksouth",
-    "ukwest",
-    "westcentralus",
-    "westus2",
-    "koreacentral",
-    "koreasouth",
-    "francecentral",
-    "francesouth",
-    "australiacentral",
-    "australiacentral2",
-    "uaecentral",
-    "uaenorth",
-    "southafricanorth",
-    "southafricawest",
-    "switzerlandnorth",
-    "switzerlandwest",
-    "germanynorth",
-    "germanywestcentral",
-    "norwaywest",
-    "norwayeast",
-    "global"
-  ]
-}
-
 variable "diagnostic_settings_name" {
   type        = string
   default     = "Lacework Activity Logs"
   description = "The name of the subscription's Diagnostic Setting for Activity Logs"
-}
-
-variable "log_profile_name" {
-  type        = string
-  default     = ""
-  description = "[DEPRECATED] The name of the Log Profile"
 }
 
 variable "storage_account_name" {
@@ -164,12 +76,6 @@ variable "storage_account_resource_group" {
   type        = string
   default     = ""
   description = "The Resource Group for the existing Storage Account"
-}
-
-variable "use_existing_log_profile" {
-  type        = bool
-  default     = true
-  description = "[DEPRECATED] Set this to `true` to use an existing Log Profile. Default behavior creates a new Log Profile"
 }
 
 variable "use_existing_storage_account" {
