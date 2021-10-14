@@ -44,7 +44,7 @@ variable "all_subscriptions" {
 
 variable "wait_time" {
   type        = string
-  default     = "20s"
+  default     = "50s"
   description = "Amount of time to wait before the Lacework resources are provisioned"
 }
 
