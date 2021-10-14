@@ -197,7 +197,7 @@ resource "time_sleep" "wait_time" {
   ]
 }
 
-resource "lacework_integration_azure_al" "default" {
+resource "lacework_integration_azure_al" "lacework" {
   name      = var.lacework_integration_name
   tenant_id = local.tenant_id
   queue_url = "https://${local.storage_account_name}.queue.core.windows.net/${azurerm_storage_queue.lacework.name}"
