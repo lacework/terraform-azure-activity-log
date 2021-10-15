@@ -183,7 +183,7 @@ resource "azurerm_role_definition" "lacework" {
 
 resource "azurerm_role_assignment" "lacework" {
   role_definition_id = azurerm_role_definition.lacework.role_definition_resource_id
-  principal_id       = var.service_principal_id
+  principal_id       = local.service_principal_id
   scope              = "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group}"
 }
 
@@ -202,8 +202,8 @@ resource "lacework_integration_azure_al" "lacework" {
   tenant_id = local.tenant_id
   queue_url = "https://${local.storage_account_name}.queue.core.windows.net/${azurerm_storage_queue.lacework.name}"
   credentials {
-    client_id     = var.application_id
-    client_secret = var.application_password
+    client_id     = local.application_id
+    client_secret = local.application_password
   }
   depends_on = [time_sleep.wait_time]
 }
