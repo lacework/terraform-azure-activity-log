@@ -22,6 +22,7 @@ module "az_ad_application" {
   source  = "lacework/ad-application/azure"
   version = "~> 1.0"
   create  = var.use_existing_ad_application ? false : true
+  application_name  = var.application_name
 }
 
 resource "random_id" "uniq" {
