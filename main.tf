@@ -87,26 +87,6 @@ resource "azurerm_eventgrid_event_subscription" "lacework" {
   ]
 }
 
-# resource "azurerm_monitor_log_profile" "lacework" {
-#   count              = var.use_existing_log_profile ? 0 : 1
-#   name               = local.log_profile_name
-#   locations          = var.log_profile_locations
-#   storage_account_id = azurerm_storage_account.lacework[0].id
-
-#   categories = [
-#     "Action",
-#     "Delete",
-#     "Write",
-#   ]
-
-#   # TODO @afiune customize these settings
-#   retention_policy {
-#     enabled = true
-#     days    = 7
-#   }
-# }
-
-
 data "azurerm_subscriptions" "available" {}
 
 #create Diag Settings on all subscriptions requested by user, centralizing logs in single storage
