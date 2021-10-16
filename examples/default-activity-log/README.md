@@ -5,8 +5,6 @@ The following example integrates an Azure tenant and the default subscription wi
 ## Sample Code
 
 ```hcl
-provider "azuread" {}
-
 provider "azurerm" {
   features {}
 }
@@ -15,7 +13,7 @@ provider "lacework" {}
 
 module "az_activity_log" {
   source  = "lacework/activity-log/azure"
-  version = "~> 0.1"
+  version = "~> 1.0"
 }
 ```
 
