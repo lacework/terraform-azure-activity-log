@@ -11,7 +11,7 @@ readonly project_name=terraform-azure-activity-log
 TEST_CASES=(
   examples/custom-activity-log
   examples/default-activity-log
-  examples/existing-log-profile
+  examples/existing-storage-account
 )
 
 log() {
