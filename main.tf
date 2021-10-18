@@ -176,7 +176,14 @@ resource "time_sleep" "wait_time" {
     azurerm_eventgrid_event_subscription.lacework,
     azurerm_storage_queue.lacework,
     azurerm_role_assignment.lacework
-  ]
+  ]  
+  triggers = {
+    # Save the time we first heard about the application ID, so we wait again if it changes
+    app_id = local.application_id
+    # Same thing for LW integration name, which changed for v1.0, and waiting is needed to avoid API error when recreating it too fast
+    integration_name = var.lacework_integration_name
+  }
+
 }
 
 resource "lacework_integration_azure_al" "lacework" {
