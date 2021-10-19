@@ -1,7 +1,9 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v0.3.3`.
+Another day, another release. These are the release notes for the version `v0.3.4`.
 
+## Refactor
+* refactor(v1.0): deprecate Log Profiles in favor of Diagnostic Settings (#49) (Marc Garcia)([b0b472f](https://github.com/lacework/terraform-azure-activity-log/commit/b0b472f6d33e082b074d533a7b38a86fef07e6cc))
 ## Bug Fixes
-* fix: use data source when using existing storage account (#46) (Salim Afiune)([0e8b3a5](https://github.com/lacework/terraform-azure-activity-log/commit/0e8b3a5bdb100738c0ad90141614c305dc508e97))
+* fix: Avoid 400 Error in upgrade scenario  (#52) (Marc Garcia)([6f7107e](https://github.com/lacework/terraform-azure-activity-log/commit/6f7107e8dd7d071f7f8e294d18fdbf2b319afc3c))
 ## Other Changes
-* ci: version bump to v0.3.3-dev (Lacework)([14cce67](https://github.com/lacework/terraform-azure-activity-log/commit/14cce679e4b3e809173d252649f451b43c3686ca))
+* ci: version bump to v0.3.4-dev (Lacework)([c06ef57](https://github.com/lacework/terraform-azure-activity-log/commit/c06ef57c8c6be8701c038a9c3cfec7524bee0044))
