@@ -1,4 +1,4 @@
-# v0.3.4
+# v1.0.0
 
 ## Refactor
 * refactor(v1.0): deprecate Log Profiles in favor of Diagnostic Settings (#49) (Marc Garcia)([b0b472f](https://github.com/lacework/terraform-azure-activity-log/commit/b0b472f6d33e082b074d533a7b38a86fef07e6cc))
