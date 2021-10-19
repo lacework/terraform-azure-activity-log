@@ -178,9 +178,9 @@ resource "time_sleep" "wait_time" {
     azurerm_role_assignment.lacework
   ]  
   triggers = {
-    # Save the time we first heard about the application ID, so we wait again if it changes
+    # If App ID changes, trigger a wait between lacework_integration_azure_cfg destroys and re-creates, to avoid API errors
     app_id = local.application_id
-    # Same thing for LW integration name, which changed for v1.0, and waiting is needed to avoid API error when recreating it too fast
+    # If the Integration object changes (like during upgrade to v1.0), trigger a wait between lacework_integration_azure_cfg destroys and re-creates, to avoid API errors
     integration_name = var.lacework_integration_name
   }
 
