@@ -20,7 +20,7 @@ variable "application_password" {
 }
 variable "diagnostic_settings_name" {
   type        = string
-  default     = "Lacework Activity Logs"
+  default     = "lacework_activity_logs"
   description = "The name of the subscription's Diagnostic Setting for Activity Logs"
 }
 variable "lacework_integration_name" {
