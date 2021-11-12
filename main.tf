@@ -92,7 +92,7 @@ resource "azurerm_eventgrid_event_subscription" "lacework" {
 
 # create Diag Settings on all subscriptions requested by user, centralizing logs in single storage
 resource "azurerm_monitor_diagnostic_setting" "lacework" {
-  name               = var.diagnostic_settings_name # TODO: don't re-use log-profile name for diag-settings name
+  name               = "${var.prefix}-${var.diagnostic_settings_name}-${random_id.uniq.hex}"
   count              = length(local.subscription_ids)
   target_resource_id = "/subscriptions/${local.subscription_ids[count.index]}"
   storage_account_id = local.storage_account_id
@@ -176,7 +176,7 @@ resource "time_sleep" "wait_time" {
     azurerm_eventgrid_event_subscription.lacework,
     azurerm_storage_queue.lacework,
     azurerm_role_assignment.lacework
-  ]  
+  ]
   triggers = {
     # If App ID changes, trigger a wait between lacework_integration_azure_al destroys and re-creates, to avoid API errors
     app_id = local.application_id
