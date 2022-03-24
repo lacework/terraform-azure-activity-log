@@ -30,7 +30,7 @@ variable "lacework_integration_name" {
 }
 variable "location" {
   type        = string
-  description = "The Azure Region in which all resources should be created"
+  description = "Azure region where the storage account for logging will reside"
   default     = "West US 2"
 }
 # NOTE: this prefix is used in all resources and we have a limitation with the
