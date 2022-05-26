@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 0.14"
 
   required_providers {
-    azurerm = "~> 2.28"
+    azurerm = "~> 3.7"
     random  = ">= 2.1"
     lacework = {
       source  = "lacework/lacework"
