@@ -92,8 +92,9 @@ resource "azurerm_eventgrid_event_subscription" "lacework" {
 
 # create Diag Settings on all subscriptions requested by user, centralizing logs in single storage
 resource "azurerm_monitor_diagnostic_setting" "lacework" {
+  count = length(local.subscription_ids)
+
   name               = "${var.prefix}-${var.diagnostic_settings_name}-${random_id.uniq.hex}"
-  count              = length(local.subscription_ids)
   target_resource_id = "/subscriptions/${local.subscription_ids[count.index]}"
   storage_account_id = local.storage_account_id
 
@@ -128,6 +129,13 @@ resource "azurerm_monitor_diagnostic_setting" "lacework" {
   log {
     category = "ServiceHealth"
     enabled  = false
+  }
+
+  # Currently required for https://github.com/hashicorp/terraform-provider-azurerm/issues/8131
+  lifecycle {
+    ignore_changes = [
+      log_analytics_destination_type
+    ]
   }
 }
 

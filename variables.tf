@@ -20,7 +20,7 @@ variable "application_password" {
 }
 variable "diagnostic_settings_name" {
   type        = string
-  default     = "lacework_activity_logs"
+  default     = "activity-logs"
   description = "The name of the subscription's Diagnostic Setting for Activity Logs"
 }
 variable "lacework_integration_name" {
@@ -62,8 +62,8 @@ variable "subscription_ids" {
   default     = []
 }
 variable "tags" {
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
   description = "Key-value map of Tag names and Tag values"
 }
 variable "use_existing_ad_application" {

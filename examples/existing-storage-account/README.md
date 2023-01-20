@@ -11,7 +11,7 @@ provider "lacework" {}
 
 module "az_activity_log" {
   source  = "lacework/activity-log/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   use_existing_storage_account   = true
   storage_account_name           = "storageaccountname"
