@@ -1,7 +1,7 @@
 locals {
   subscription_ids = var.all_subscriptions ? (
     // the user wants to grant access to all subscriptions
-    [for s in data.azurerm_subscriptions.available.subscriptions : s.subscription_id if s.state == "Enabled"]
+    [for s in data.azurerm_subscriptions.available.subscriptions : s.subscription_id if s.state == "Enabled" && !contains(var.subscription_exclusions, s.subscription_id)]
     ) : (
     // or, if the user wants to grant a list of subscriptions,
     // if none then we default to the primary subscription

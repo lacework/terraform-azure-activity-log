@@ -65,6 +65,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | <a name="input_service_principal_id"></a> [service\_principal\_id](#input\_service\_principal\_id) | The Enterprise App Object ID related to the application\_id (required when use\_existing\_ad\_application is true) | `string` | `""` | no |
 | <a name="input_storage_account_name"></a> [storage\_account\_name](#input\_storage\_account\_name) | The name of the Storage Account | `string` | `""` | no |
 | <a name="input_storage_account_resource_group"></a> [storage\_account\_resource\_group](#input\_storage\_account\_resource\_group) | The Resource Group for the existing Storage Account | `string` | `""` | no |
+| <a name="input_subscription_exclusions"></a> [subscription\_exclusions](#input\_subscription\_exclusions) | List of subscriptions to exclude when using the `all_subscriptions` option. | `list(string)` | `[]` | no |
 | <a name="input_subscription_ids"></a> [subscription\_ids](#input\_subscription\_ids) | List of subscriptions to enable logging (by default the module will only use the primary subscription) | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Key-value map of Tag names and Tag values | `map(string)` | `{}` | no |
 | <a name="input_use_existing_ad_application"></a> [use\_existing\_ad\_application](#input\_use\_existing\_ad\_application) | Set this to `true` to use an existing Active Directory Application | `bool` | `false` | no |
