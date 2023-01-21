@@ -56,14 +56,19 @@ variable "storage_account_resource_group" {
   default     = ""
   description = "The Resource Group for the existing Storage Account"
 }
+variable "subscription_exclusions" {
+  type        = list(string)
+  description = "List of subscriptions to exclude when using the `all_subscriptions` option."
+  default     = []
+}
 variable "subscription_ids" {
   type        = list(string)
   description = "List of subscriptions to enable logging (by default the module will only use the primary subscription)"
   default     = []
 }
 variable "tags" {
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
   description = "Key-value map of Tag names and Tag values"
 }
 variable "use_existing_ad_application" {
