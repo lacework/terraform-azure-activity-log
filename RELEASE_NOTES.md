@@ -1,8 +1,8 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v1.2.1`.
+Another day, another release. These are the release notes for the version `v2.1.0`.
 
-## Documentation Updates
-* docs: update Lacework provider version in readme (#66) (Darren)([e305a43](https://github.com/lacework/terraform-azure-activity-log/commit/e305a43ca734cea5f6bfccea5ab45c37fca891da))
+## Features
+* feat: allow subscription exclusions when `all_subscriptions` is used (#69) (Alan Nix)([e80258f](https://github.com/lacework/terraform-azure-activity-log/commit/e80258f3a7de2906d226d1b00344b178e3c62279))
 ## Other Changes
-* chore: update Lacework provider version to v1 (#65) (Darren)([87983b1](https://github.com/lacework/terraform-azure-activity-log/commit/87983b12a4ae866db4b68e40f7e8145c01327ecd))
-* ci: version bump to v1.2.1-dev (Lacework)([87f1f17](https://github.com/lacework/terraform-azure-activity-log/commit/87f1f170f75319bab24cae2fd41b1f403ac15d19))
+* chore: updating `azurerm` to v3 (#68) (Alan Nix)([430e750](https://github.com/lacework/terraform-azure-activity-log/commit/430e750dc16e2bfcdb9069272697f977075c4e35))
+* ci: version bump to v1.2.2-dev (Lacework)([44dea77](https://github.com/lacework/terraform-azure-activity-log/commit/44dea771a6336855feb7ba31b295a9a2e9083280))
