@@ -1,5 +1,5 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v2.1.0`.
+Another day, another release. These are the release notes for the version `v2.0.0`.
 
 ## Features
 * feat: allow subscription exclusions when `all_subscriptions` is used (#69) (Alan Nix)([e80258f](https://github.com/lacework/terraform-azure-activity-log/commit/e80258f3a7de2906d226d1b00344b178e3c62279))
