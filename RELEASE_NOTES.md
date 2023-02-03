@@ -1,8 +1,7 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v2.0.0`.
+Another day, another release. These are the release notes for the version `v2.0.1`.
 
-## Features
-* feat: allow subscription exclusions when `all_subscriptions` is used (#69) (Alan Nix)([e80258f](https://github.com/lacework/terraform-azure-activity-log/commit/e80258f3a7de2906d226d1b00344b178e3c62279))
+## Bug Fixes
+* fix: add dependency to azurerm_monitor_diagnostic_setting resource (#72) (Salim Afiune)([f5846cd](https://github.com/lacework/terraform-azure-activity-log/commit/f5846cd58d125d2e202a51deb1f21ad6d3f731a9))
 ## Other Changes
-* chore: updating `azurerm` to v3 (#68) (Alan Nix)([430e750](https://github.com/lacework/terraform-azure-activity-log/commit/430e750dc16e2bfcdb9069272697f977075c4e35))
-* ci: version bump to v1.2.2-dev (Lacework)([44dea77](https://github.com/lacework/terraform-azure-activity-log/commit/44dea771a6336855feb7ba31b295a9a2e9083280))
+* ci: version bump to v2.0.1-dev (Lacework)([94da791](https://github.com/lacework/terraform-azure-activity-log/commit/94da791facc941a895fb5f2b953e3fe047011a0e))
