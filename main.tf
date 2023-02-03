@@ -183,6 +183,7 @@ resource "time_sleep" "wait_time" {
   depends_on = [
     azurerm_eventgrid_event_subscription.lacework,
     azurerm_storage_queue.lacework,
+    azurerm_monitor_diagnostic_setting.lacework,
     azurerm_role_assignment.lacework
   ]
   triggers = {
