@@ -58,6 +58,8 @@ resource "azurerm_storage_account" "lacework" {
   resource_group_name       = azurerm_resource_group.lacework[0].name
   tags                      = azurerm_resource_group.lacework[0].tags
   #enable_blob_encryption    = true
+
+  allow_nested_items_to_be_public = false
 }
 
 resource "azurerm_storage_queue" "lacework" {
