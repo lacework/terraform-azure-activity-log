@@ -1,7 +1,7 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v2.0.1`.
+Another day, another release. These are the release notes for the version `v2.0.2`.
 
 ## Bug Fixes
-* fix: add dependency to azurerm_monitor_diagnostic_setting resource (#72) (Salim Afiune)([f5846cd](https://github.com/lacework/terraform-azure-activity-log/commit/f5846cd58d125d2e202a51deb1f21ad6d3f731a9))
+* fix(storage): turn off nested public permission (#76) (jympetalmd)([cba533c](https://github.com/lacework/terraform-azure-activity-log/commit/cba533c05b92496fd7551302ff9d75da9e9e40db))
 ## Other Changes
-* ci: version bump to v2.0.1-dev (Lacework)([94da791](https://github.com/lacework/terraform-azure-activity-log/commit/94da791facc941a895fb5f2b953e3fe047011a0e))
+* ci: version bump to v2.0.2-dev (Lacework)([c896a7e](https://github.com/lacework/terraform-azure-activity-log/commit/c896a7e57966dd6475321a13c239235edd2fdaa1))
