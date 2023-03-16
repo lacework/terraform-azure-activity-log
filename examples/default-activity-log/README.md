@@ -1,6 +1,7 @@
 # Integrate Azure with Lacework for Activity Log Analysis with Default Settings
 
-The following example integrates an Azure tenant and the default subscription with Lacework for Activity Log analysis using default values.
+The following example integrates an Azure tenant and the default subscription with Lacework
+for Activity Log analysis using default values.
 
 ## Sample Code
 
@@ -17,4 +18,4 @@ module "az_activity_log" {
 }
 ```
 
-For detailed information on integrating Lacework with Azure see [Azure Compliance & Activity Log Integrations - Terraform From Any Supported Host](https://support.lacework.com/hc/en-us/articles/360058966313-Azure-Compliance-Activity-Log-Integrations-Terraform-From-Any-Supported-Host)
+For detailed information on integrating Lacework with Azure see [Azure Compliance & Activity Log Integrations - Terraform From Any Supported Host](https://docs.lacework.com/onboarding/azure-compliance-and-activity-log-integrations-terraform-from-any-supported-host)

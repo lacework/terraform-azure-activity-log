@@ -1,0 +1,10 @@
+provider "azurerm" {
+  features {}
+}
+
+provider "lacework" {}
+
+module "az_activity_log" {
+  source            = "../../"
+  all_subscriptions = true
+}

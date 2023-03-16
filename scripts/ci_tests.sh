@@ -12,6 +12,9 @@ TEST_CASES=(
   examples/custom-activity-log
   examples/default-activity-log
   examples/existing-storage-account
+  examples/all-subscriptions-in-tenant
+  examples/multiple-subscriptions-in-tenant
+  examples/multiple-tenants
 )
 
 log() {
