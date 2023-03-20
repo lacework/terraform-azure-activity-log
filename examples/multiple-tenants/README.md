@@ -1,6 +1,6 @@
 # Integrate Multiple Azure Tenants
 
-The following example integrates multiple Azure tenants and all their subscriptions
+The following example integrates multiple Azure tenants and all their subscriptions with Lacework for Activity Log analysis.
 
 ```hcl
 provider "lacework" {}
@@ -40,4 +40,4 @@ module "az_activity_log_tenant_2" {
 }
 ```
 
-For detailed information on integrating Lacework with Azure see [Azure Compliance & Activity Log Integrations - Terraform From Any Supported Host](https://docs.lacework.com/onboarding/azure-compliance-and-activity-log-integrations-terraform-from-any-supported-host)
+For detailed information on integrating Lacework with Azure. see [Azure Compliance & Activity Log Integrations - Terraform From Any Supported Host](https://docs.lacework.com/onboarding/azure-compliance-and-activity-log-integrations-terraform-from-any-supported-host).

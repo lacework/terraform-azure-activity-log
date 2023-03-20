@@ -1,7 +1,7 @@
 # Integrate Multiple Azure Subscriptions within a Tenant
 
 The following example integrates multiple Azure subscriptions within a
-single Azure tenant.
+single Azure tenant with Lacework for Activity Log analysis.
 
 ```hcl
 provider "azurerm" {
@@ -23,4 +23,4 @@ module "az_activity_log" {
 }
 ```
 
-For detailed information on integrating Lacework with Azure see [Azure Compliance & Activity Log Integrations - Terraform From Any Supported Host](https://docs.lacework.com/onboarding/azure-compliance-and-activity-log-integrations-terraform-from-any-supported-host)
+For detailed information on integrating Lacework with Azure, see [Azure Compliance & Activity Log Integrations - Terraform From Any Supported Host](https://docs.lacework.com/onboarding/azure-compliance-and-activity-log-integrations-terraform-from-any-supported-host).
