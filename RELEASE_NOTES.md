@@ -1,7 +1,8 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v2.0.3`.
+Another day, another release. These are the release notes for the version `v2.0.4`.
 
-## Documentation Updates
-* docs: add multiple examples (#78) (Salim Afiune)([b2eb554](https://github.com/lacework/terraform-azure-activity-log/commit/b2eb55476e9222882fa19c5d5d535da28073a765))
+## Bug Fixes
+* fix: log_retention_days input variable (jon-stewart)([0efecfd](https://github.com/lacework/terraform-azure-activity-log/commit/0efecfd29a7de8dfe5e4400b8cc5858b6b5a56ef))
+* fix: tfsec violations (jon-stewart)([a0021bf](https://github.com/lacework/terraform-azure-activity-log/commit/a0021bf6983b69bc7a8afb0fb6b866e603684e77))
 ## Other Changes
-* ci: version bump to v2.0.3-dev (Lacework)([849b02c](https://github.com/lacework/terraform-azure-activity-log/commit/849b02c60078f4cff42e321a40799d97b57a31e0))
+* ci: version bump to v2.0.4-dev (Lacework)([acf7be4](https://github.com/lacework/terraform-azure-activity-log/commit/acf7be428480f8fcc5ac5cb7a014592ba1bf84bb))
