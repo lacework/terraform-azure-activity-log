@@ -66,7 +66,7 @@ resource "azurerm_storage_account" "lacework" {
       read                  = true
       write                 = true
       version               = "1.0"
-      retention_policy_days = 10
+      retention_policy_days = var.log_retention_days
     }
   }
 }
