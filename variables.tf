@@ -33,6 +33,11 @@ variable "location" {
   description = "Azure region where the storage account for logging will reside"
   default     = "West US 2"
 }
+variable "log_retention_days" {
+  type        = number
+  description = "Specifies the number of days that logs will be retained"
+  default     = 10
+}
 # NOTE: this prefix is used in all resources and we have a limitation with the
 # storage name that can only consist of lowercase letters and numbers, and must
 # be between 3 and 24 characters long
