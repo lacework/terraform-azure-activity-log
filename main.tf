@@ -124,9 +124,8 @@ resource "azurerm_monitor_diagnostic_setting" "lacework" {
   enabled_log {
     category = "ResourceHealth"
   }
-  log {
+  enabled_log {
     category = "Autoscale"
-    enabled  = false
   }
   enabled_log {
     category = "Recommendation"
