@@ -109,37 +109,30 @@ resource "azurerm_monitor_diagnostic_setting" "lacework" {
   target_resource_id = "/subscriptions/${local.subscription_ids[count.index]}"
   storage_account_id = local.storage_account_id
 
-  log {
+  enabled_log {
     category = "Administrative"
-    enabled  = true
   }
-  log {
+  enabled_log {
     category = "Security"
-    enabled  = true
   }
-  log {
+  enabled_log {
     category = "Alert"
-    enabled  = true
   }
-  log {
+  enabled_log {
     category = "Policy"
-    enabled  = true
   }
-  log {
+  enabled_log {
     category = "ResourceHealth"
-    enabled  = true
   }
   log {
     category = "Autoscale"
     enabled  = false
   }
-  log {
+  enabled_log {
     category = "Recommendation"
-    enabled  = false
   }
-  log {
+  enabled_log {
     category = "ServiceHealth"
-    enabled  = false
   }
 
   # Currently required for https://github.com/hashicorp/terraform-provider-azurerm/issues/8131
