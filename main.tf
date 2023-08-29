@@ -103,10 +103,10 @@ resource "azurerm_eventgrid_event_subscription" "lacework" {
 
 # create Diag Settings on all subscriptions requested by user, centralizing logs in single storage
 resource "azurerm_monitor_diagnostic_setting" "lacework" {
-  count = length(local.subscription_ids)
+  for_each = toset(local.subscription_ids)
 
   name               = "${var.prefix}-${var.diagnostic_settings_name}-${random_id.uniq.hex}"
-  target_resource_id = "/subscriptions/${local.subscription_ids[count.index]}"
+  target_resource_id = "/subscriptions/${each.key}"
   storage_account_id = local.storage_account_id
 
   enabled_log {
