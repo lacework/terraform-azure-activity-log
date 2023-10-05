@@ -8,12 +8,13 @@
 Terraform module for configuring an integration with Azure Subscriptions and Tenants for Activity Log analysis.
 It configures a Diagnostic Setting that puts logs in an storage account, from which Lacework will read Activity Logs.
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.71 |
 | <a name="requirement_lacework"></a> [lacework](#requirement\_lacework) | ~> 1.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 2.1 |
 
@@ -21,7 +22,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.71 |
 | <a name="provider_lacework"></a> [lacework](#provider\_lacework) | ~> 1.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | >= 2.1 |
 | <a name="provider_time"></a> [time](#provider\_time) | n/a |
@@ -58,10 +59,10 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | <a name="input_application_id"></a> [application\_id](#input\_application\_id) | The Active Directory Application id to use (required when use\_existing\_ad\_application is set to true) | `string` | `""` | no |
 | <a name="input_application_name"></a> [application\_name](#input\_application\_name) | The name of the Azure Active Directory Application (required when use\_existing\_ad\_application is set to true) | `string` | `"lacework_security_audit"` | no |
 | <a name="input_application_password"></a> [application\_password](#input\_application\_password) | The Active Directory Application password to use (required when use\_existing\_ad\_application is set to true) | `string` | `""` | no |
-| <a name="input_diagnostic_settings_name"></a> [diagnostic\_settings\_name](#input\_diagnostic\_settings\_name) | The name of the subscription's Diagnostic Setting for Activity Logs | `string` | `"lacework_activity_logs"` | no |
+| <a name="input_diagnostic_settings_name"></a> [diagnostic\_settings\_name](#input\_diagnostic\_settings\_name) | The name of the subscription's Diagnostic Setting for Activity Logs | `string` | `"activity-logs"` | no |
 | <a name="input_lacework_integration_name"></a> [lacework\_integration\_name](#input\_lacework\_integration\_name) | The Lacework integration name | `string` | `"TF activity log"` | no |
 | <a name="input_location"></a> [location](#input\_location) | Azure region where the storage account for logging will reside | `string` | `"West US 2"` | no |
-| <a name="input_log_retention_days"></a> [log_retention_days](#input\_log\_retention\_days) | Specifies the number of days that logs will be retained | `number` | `10` | no |
+| <a name="input_log_retention_days"></a> [log\_retention\_days](#input\_log\_retention\_days) | Specifies the number of days that logs will be retained | `number` | `10` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | The prefix to use at the beginning of every generated resource | `string` | `"lacework"` | no |
 | <a name="input_service_principal_id"></a> [service\_principal\_id](#input\_service\_principal\_id) | The Enterprise App Object ID related to the application\_id (required when use\_existing\_ad\_application is true) | `string` | `""` | no |
 | <a name="input_storage_account_name"></a> [storage\_account\_name](#input\_storage\_account\_name) | The name of the Storage Account | `string` | `""` | no |
@@ -84,3 +85,4 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | <a name="output_storage_account_name"></a> [storage\_account\_name](#output\_storage\_account\_name) | The name of the centralized Storage Account for Activity Logs |
 | <a name="output_storage_account_resource_group"></a> [storage\_account\_resource\_group](#output\_storage\_account\_resource\_group) | The resource group of the centralized Storage Account for Activity Logs |
 | <a name="output_subscription_ids"></a> [subscription\_ids](#output\_subscription\_ids) | The list of subscriptions that will send Activity Logs to the storage account |
+<!-- END_TF_DOCS -->
