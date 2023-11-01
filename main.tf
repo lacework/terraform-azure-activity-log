@@ -48,18 +48,18 @@ data "azurerm_storage_account" "lacework" {
 }
 
 resource "azurerm_storage_account" "lacework" {
-  count                     = var.use_existing_storage_account ? 0 : 1
-  name                      = local.storage_account_name
-  account_kind              = "StorageV2"
-  account_tier              = "Standard"
-  account_replication_type  = "LRS"
-  enable_https_traffic_only = true
-  location                  = var.location
-  resource_group_name       = azurerm_resource_group.lacework[0].name
-  tags                      = azurerm_resource_group.lacework[0].tags
-  min_tls_version           = "TLS1_2"
-  #enable_blob_encryption    = true
-  allow_nested_items_to_be_public = false
+  count                             = var.use_existing_storage_account ? 0 : 1
+  name                              = local.storage_account_name
+  account_kind                      = "StorageV2"
+  account_tier                      = "Standard"
+  account_replication_type          = "LRS"
+  enable_https_traffic_only         = true
+  location                          = var.location
+  resource_group_name               = azurerm_resource_group.lacework[0].name
+  tags                              = azurerm_resource_group.lacework[0].tags
+  min_tls_version                   = "TLS1_2"
+  infrastructure_encryption_enabled = true
+  allow_nested_items_to_be_public   = false
   queue_properties {
     logging {
       delete                = true
