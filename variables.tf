@@ -91,5 +91,10 @@ variable "wait_time" {
   default     = "50s"
   description = "Amount of time to wait before the Lacework resources are provisioned"
 }
+variable "infrastructure_encryption_enabled" {
+  type        = bool
+  default     = false
+  description = "Enable Infrastructure Encryption for Azure Storage Account"
+}
 
 
