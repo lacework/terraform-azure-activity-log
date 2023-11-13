@@ -103,8 +103,30 @@ variable "storage_account_network_rule_bypass" {
 }
 variable "storage_account_network_rule_ip_rules" {
   type        = list(string)
-  default     = [""]
-  description = "List of allowed ip addresses."
+  default     = [
+    # US
+    "34.208.85.38", 
+    "35.165.121.10",  
+    "35.165.62.149",
+    "35.165.83.150",  
+    "35.166.181.157",
+    "35.93.121.192/26",
+    "44.231.201.69",
+    "52.42.2.33",
+    "52.43.197.121",
+    "52.88.113.199",
+    "54.200.230.179",
+    "54.203.18.234",
+    "54.213.7.200",
+    # EU
+    "3.75.192.192/26",
+    "3.121.245.162",
+    "18.184.141.112",
+    "18.193.166.115",
+    # APAC
+    "3.27.79.192/26"
+  ]
+  description = "List of allowed ip addresses. See https://docs.lacework.net/onboarding/lacework-outbound-ips#docusaurus_skipToContent_fallback"
 }
 
 
