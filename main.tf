@@ -71,6 +71,14 @@ resource "azurerm_storage_account" "lacework" {
   }
 }
 
+resource "azurerm_storage_account_network_rules" "lacework" {
+  storage_account_id = local.storage_account_id
+
+  default_action = "Deny"
+  bypass         = var.storage_account_network_rule_bypass
+  ip_rules       = var.storage_account_network_rule_ip_rules
+}
+
 resource "azurerm_storage_queue" "lacework" {
   name = "${var.prefix}-queue-${random_id.uniq.hex}"
   storage_account_name = var.use_existing_storage_account ? (
