@@ -43,6 +43,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | [azurerm_role_assignment.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_definition.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition) | resource |
 | [azurerm_storage_account.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
+| [azurerm_storage_account_network_rules.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules) | resource |
 | [azurerm_storage_queue.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_queue) | resource |
 | [lacework_integration_azure_al.lacework](https://registry.terraform.io/providers/lacework/lacework/latest/docs/resources/integration_azure_al) | resource |
 | [random_id.uniq](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
@@ -67,6 +68,8 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | The prefix to use at the beginning of every generated resource | `string` | `"lacework"` | no |
 | <a name="input_service_principal_id"></a> [service\_principal\_id](#input\_service\_principal\_id) | The Enterprise App Object ID related to the application\_id (required when use\_existing\_ad\_application is true) | `string` | `""` | no |
 | <a name="input_storage_account_name"></a> [storage\_account\_name](#input\_storage\_account\_name) | The name of the Storage Account | `string` | `""` | no |
+| <a name="input_storage_account_network_rule_bypass"></a> [storage\_account\_network\_rule\_bypass](#input\_storage\_account\_network\_rule\_bypass) | Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of `Logging`, `Metrics`, `AzureServices`, or `None`. | `list(string)` | <pre>[<br>  "Metrics",<br>  "Logging",<br>  "AzureServices"<br>]</pre> | no |
+| <a name="input_storage_account_network_rule_ip_rules"></a> [storage\_account\_network\_rule\_ip\_rules](#input\_storage\_account\_network\_rule\_ip\_rules) | List of allowed ip addresses. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | <a name="input_storage_account_resource_group"></a> [storage\_account\_resource\_group](#input\_storage\_account\_resource\_group) | The Resource Group for the existing Storage Account | `string` | `""` | no |
 | <a name="input_subscription_exclusions"></a> [subscription\_exclusions](#input\_subscription\_exclusions) | List of subscriptions to exclude when using the `all_subscriptions` option. | `list(string)` | `[]` | no |
 | <a name="input_subscription_ids"></a> [subscription\_ids](#input\_subscription\_ids) | List of subscriptions to enable logging (by default the module will only use the primary subscription) | `list(string)` | `[]` | no |

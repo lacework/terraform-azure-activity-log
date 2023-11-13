@@ -99,8 +99,7 @@ variable "infrastructure_encryption_enabled" {
 variable "storage_account_network_rule_bypass" {
   type        = list(string)
   default     = ["Metrics", "Logging", "AzureServices"]
-  description = "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices.
-   Valid options are any combination of `Logging`, `Metrics`, `AzureServices`, or `None`."
+  description = "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of `Logging`, `Metrics`, `AzureServices`, or `None`."
 }
 variable "storage_account_network_rule_ip_rules" {
   type        = list(string)
