@@ -78,6 +78,8 @@ resource "azurerm_storage_account_network_rules" "lacework" {
   default_action     = "Deny"
   bypass             = var.storage_account_network_rule_bypass
   ip_rules           = var.storage_account_network_rule_ip_rules
+
+  depends_on = [azurerm_storage_queue.lacework]
 }
 
 resource "azurerm_storage_queue" "lacework" {
