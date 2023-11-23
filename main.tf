@@ -77,7 +77,8 @@ resource "azurerm_storage_account_network_rules" "lacework" {
   storage_account_id = local.storage_account_id
   default_action     = var.storage_account_network_rule_action
   bypass             = var.storage_account_network_rule_bypass
-  ip_rules           = concat(var.storage_account_network_rule_ip_rules, var.storage_account_network_rule_lacework_ip_rules)
+  ip_rules           = concat(var.storage_account_network_rule_ip_rules,
+   var.storage_account_network_rule_lacework_ip_rules)
 
   depends_on = [azurerm_storage_queue.lacework]
 }

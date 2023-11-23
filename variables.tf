@@ -103,7 +103,7 @@ variable "use_storage_account_network_rules" {
 }
 variable "storage_account_network_rule_action" {
   type        = string
-  default     = "DENY"
+  default     = "Deny"
   description = "Configure azurerm_storage_account_network_rules resource"
 }
 variable "storage_account_network_rule_bypass" {
