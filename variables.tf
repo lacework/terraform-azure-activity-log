@@ -96,12 +96,32 @@ variable "infrastructure_encryption_enabled" {
   default     = false
   description = "Enable Infrastructure Encryption for Azure Storage Account"
 }
+variable "use_storage_account_network_rules" {
+  type        = bool
+  default     = "DENY"
+  description = "Configure azurerm_storage_account_network_rules resource"
+}
+variable "use_storage_account_network_rule_action" {
+  type        = string
+  default     = false
+  description = "Configure azurerm_storage_account_network_rules resource"
+}
 variable "storage_account_network_rule_bypass" {
   type        = list(string)
   default     = ["Metrics", "Logging", "AzureServices"]
-  description = "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of `Logging`, `Metrics`, `AzureServices`, or `None`."
+  description = "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of `Logging`, `Metrics`, `AzureServices`, or `None`. Requires `use_storage_account_network_rules` enabled."
+}
+variable "storage_account_network_rule_subnet_ids" {
+  type        = list(string)
+  default     = []
+  description = "A list of virtual network subnet ids to secure the storage account. Requires `use_storage_account_network_rules` enabled."
 }
 variable "storage_account_network_rule_ip_rules" {
+  type        = list(string)
+  default     = []
+  description = "List of allowed ip addresses. Requires `use_storage_account_network_rules` enabled."
+}
+variable "storage_account_network_rule_lacework_ip_rules" {
   type        = list(string)
   default     = [
     # US
@@ -126,7 +146,7 @@ variable "storage_account_network_rule_ip_rules" {
     # APAC
     "3.27.79.192/26"
   ]
-  description = "List of allowed ip addresses. See https://docs.lacework.net/onboarding/lacework-outbound-ips#docusaurus_skipToContent_fallback"
+  description = "List of allowed Lacework ip addresses. See https://docs.lacework.net/onboarding/lacework-outbound-ips#docusaurus_skipToContent_fallback. Requires `use_storage_account_network_rules` enabled."
 }
 
 
