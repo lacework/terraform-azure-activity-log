@@ -101,7 +101,7 @@ variable "use_storage_account_network_rules" {
   default     = false
   description = "Configure azurerm_storage_account_network_rules resource"
 }
-variable "use_storage_account_network_rule_action" {
+variable "storage_account_network_rule_action" {
   type        = string
   default     = "DENY"
   description = "Configure azurerm_storage_account_network_rules resource"

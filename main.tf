@@ -75,7 +75,7 @@ resource "azurerm_storage_account_network_rules" "lacework" {
   count = var.use_storage_account_network_rules && !var.use_existing_storage_account ? 1 : 0
 
   storage_account_id = local.storage_account_id
-  default_action     = var.use_storage_account_network_rule_action
+  default_action     = var.storage_account_network_rule_action
   bypass             = var.storage_account_network_rule_bypass
   ip_rules           = concat(var.storage_account_network_rule_ip_rules, var.storage_account_network_rule_lacework_ip_rules)
 
