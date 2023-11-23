@@ -9,6 +9,6 @@ module "az_activity_log" {
 
   use_storage_account_network_rules = true
 
-  # Example of allowed user Ip address. Should Include the Terraform caller.
+  # Example of allowed user Ip addresses. Should Include the Terraform caller.
   storage_account_network_rule_ip_rules = ["34.208.85.38"]
 }
