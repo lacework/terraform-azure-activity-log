@@ -98,12 +98,12 @@ variable "infrastructure_encryption_enabled" {
 }
 variable "use_storage_account_network_rules" {
   type        = bool
-  default     = "DENY"
+  default     = false
   description = "Configure azurerm_storage_account_network_rules resource"
 }
 variable "use_storage_account_network_rule_action" {
   type        = string
-  default     = false
+  default     = "DENY"
   description = "Configure azurerm_storage_account_network_rules resource"
 }
 variable "storage_account_network_rule_bypass" {
