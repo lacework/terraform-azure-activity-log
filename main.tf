@@ -19,6 +19,7 @@ locals {
     ) : (
     azurerm_resource_group.lacework[0].name
   )
+  diagnostic_settings_name = var.use_existing_diagnostic_settings ? var.diagnostic_settings_name : "${var.prefix}-${var.diagnostic_settings_name}-${random_id.uniq.hex}"
 }
 
 module "az_ad_application" {
@@ -77,8 +78,8 @@ resource "azurerm_storage_account_network_rules" "lacework" {
   storage_account_id = local.storage_account_id
   default_action     = var.storage_account_network_rule_action
   bypass             = var.storage_account_network_rule_bypass
-  ip_rules           = concat(var.storage_account_network_rule_ip_rules,
-   var.storage_account_network_rule_lacework_ip_rules)
+  ip_rules = concat(var.storage_account_network_rule_ip_rules,
+  var.storage_account_network_rule_lacework_ip_rules)
 
   depends_on = [azurerm_storage_queue.lacework]
 }
@@ -117,7 +118,7 @@ resource "azurerm_eventgrid_event_subscription" "lacework" {
 resource "azurerm_monitor_diagnostic_setting" "lacework" {
   for_each = toset(local.subscription_ids)
 
-  name               = "${var.prefix}-${var.diagnostic_settings_name}-${random_id.uniq.hex}"
+  name               = local.diagnostic_settings_name
   target_resource_id = "/subscriptions/${each.key}"
   storage_account_id = local.storage_account_id
 
