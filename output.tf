@@ -8,7 +8,7 @@ output "application_id" {
   description = "The Lacework AD Application id"
 }
 output "diagnostic_settings_name" {
-  value       = var.diagnostic_settings_name
+  value       = local.diagnostic_settings_name
   description = "The name of the subscription's Diagnostic Setting for Activity Logs"
 }
 output "service_principal_id" {

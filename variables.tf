@@ -21,7 +21,12 @@ variable "application_password" {
 variable "diagnostic_settings_name" {
   type        = string
   default     = "activity-logs"
-  description = "The name of the subscription's Diagnostic Setting for Activity Logs"
+  description = "The name of the subscription's Diagnostic Setting for Activity Logs (required when use_existing_diagnostic_settings is set to true)"
+}
+variable "use_existing_diagnostic_settings" {
+  type        = bool
+  default     = false
+  description = "Set this to `true` to use an existing Diagnostic Settings. Default behavior creates a new Diagnostic Settings"
 }
 variable "lacework_integration_name" {
   type        = string
@@ -125,10 +130,10 @@ variable "storage_account_network_rule_lacework_ip_rules" {
   type        = list(string)
   default     = [
     # US
-    "34.208.85.38", 
-    "35.165.121.10",  
+    "34.208.85.38",
+    "35.165.121.10",
     "35.165.62.149",
-    "35.165.83.150",  
+    "35.165.83.150",
     "35.166.181.157",
     "35.93.121.192/26",
     "44.231.201.69",
