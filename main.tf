@@ -70,6 +70,11 @@ resource "azurerm_storage_account" "lacework" {
       retention_policy_days = var.log_retention_days
     }
   }
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
 }
 
 resource "azurerm_storage_account_network_rules" "lacework" {
