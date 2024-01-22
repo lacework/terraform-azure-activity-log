@@ -20,6 +20,9 @@ locals {
     azurerm_resource_group.lacework[0].name
   )
   diagnostic_settings_name = var.use_existing_diagnostic_settings ? var.diagnostic_settings_name : "${var.prefix}-${var.diagnostic_settings_name}-${random_id.uniq.hex}"
+  version_file   = "${abspath(path.module)}/VERSION"
+  module_name    = basename(abspath(path.module))
+  module_version = fileexists(local.version_file) ? file(local.version_file) : ""
 }
 
 module "az_ad_application" {
@@ -211,4 +214,9 @@ resource "lacework_integration_azure_al" "lacework" {
     client_secret = local.application_password
   }
   depends_on = [time_sleep.wait_time]
+}
+
+data "lacework_metric_module" "lwmetrics" {
+  name    = local.module_name
+  version = local.module_version
 }

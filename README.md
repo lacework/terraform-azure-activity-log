@@ -15,7 +15,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.71 |
-| <a name="requirement_lacework"></a> [lacework](#requirement\_lacework) | ~> 1.0 |
+| <a name="requirement_lacework"></a> [lacework](#requirement\_lacework) | ~> 1.18 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 2.1 |
 
 ## Providers
@@ -23,7 +23,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | Name | Version |
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.71 |
-| <a name="provider_lacework"></a> [lacework](#provider\_lacework) | ~> 1.0 |
+| <a name="provider_lacework"></a> [lacework](#provider\_lacework) | ~> 1.18 |
 | <a name="provider_random"></a> [random](#provider\_random) | >= 2.1 |
 | <a name="provider_time"></a> [time](#provider\_time) | n/a |
 
@@ -51,6 +51,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | [azurerm_storage_account.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/storage_account) | data source |
 | [azurerm_subscription.primary](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
 | [azurerm_subscriptions.available](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscriptions) | data source |
+| [lacework_metric_module.lwmetrics](https://registry.terraform.io/providers/lacework/lacework/latest/docs/data-sources/metric_module) | data source |
 
 ## Inputs
 
