@@ -1,9 +1,8 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v2.1.1`.
+Another day, another release. These are the release notes for the version `v2.2.0`.
 
-## Bug Fixes
-* fix: allow optional storage account network rules configuration' (#93) (Darren)([f424502](https://github.com/lacework/terraform-azure-activity-log/commit/f42450207a1d95010cb7c739fde189a40cee3c39))
-## Documentation Updates
-* docs: correct variable descriptions (#95) (Darren)([c060a5f](https://github.com/lacework/terraform-azure-activity-log/commit/c060a5f56eb864aa7a99e2f959b731e8a33a0f0b))
+## Features
+* feat: use existing Diagnostic Settings (#96) (Pengyuan Zhao)([395823e](https://github.com/lacework/terraform-azure-activity-log/commit/395823ee90c1b69d5b195c8edf261304a06c30c2))
 ## Other Changes
-* ci: version bump to v2.1.1-dev (Lacework)([2db2053](https://github.com/lacework/terraform-azure-activity-log/commit/2db20536b596bcb0ed1921efb91af54192252164))
+* chore: add lacework_metric_module datasource (#98) (Darren)([701287d](https://github.com/lacework/terraform-azure-activity-log/commit/701287d4f3274858d1174e2c94a32b749d11e4eb))
+* ci: version bump to v2.1.2-dev (Lacework)([8f4b3af](https://github.com/lacework/terraform-azure-activity-log/commit/8f4b3afb299be5e500c481cea8b0be6f202fa145))
