@@ -38,6 +38,11 @@ resource "azurerm_resource_group" "lacework" {
   name     = "${var.prefix}-group-${random_id.uniq.hex}"
   location = var.location
   tags     = var.tags
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
 }
 
 # NOTE: storage name can only consist of lowercase letters and numbers,
@@ -69,11 +74,6 @@ resource "azurerm_storage_account" "lacework" {
       version               = "1.0"
       retention_policy_days = var.log_retention_days
     }
-  }
-  lifecycle {
-    ignore_changes = [
-      tags
-    ]
   }
 }
 
