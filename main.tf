@@ -41,6 +41,11 @@ resource "azurerm_resource_group" "lacework" {
   name     = "${var.prefix}-group-${random_id.uniq.hex}"
   location = var.location
   tags     = var.tags
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
 }
 
 # NOTE: storage name can only consist of lowercase letters and numbers,
