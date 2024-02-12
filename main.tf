@@ -89,6 +89,8 @@ resource "azurerm_storage_account_network_rules" "lacework" {
   ip_rules           = concat(var.storage_account_network_rule_ip_rules,
   var.storage_account_network_rule_lacework_ip_rules)
 
+  virtual_network_subnet_ids = [azurerm_subnet.lacework.id]
+
   depends_on = [azurerm_storage_queue.lacework]
 }
 
@@ -225,3 +227,36 @@ data "lacework_metric_module" "lwmetrics" {
   name    = local.module_name
   version = local.module_version
 }
+
+# virtual network and subnet
+resource "azurerm_virtual_network" "lacework" {
+  name                = "lacework-vnet"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.lacework[0].location
+  resource_group_name = azurerm_resource_group.lacework[0].name
+}
+
+resource "azurerm_subnet" "lacework" {
+  name                 = "lacework-subnet"
+  resource_group_name  = azurerm_resource_group.lacework[0].name
+  virtual_network_name = azurerm_virtual_network.lacework.name
+  address_prefixes     = ["10.0.1.0/24"]
+  service_endpoints    = ["Microsoft.Storage"]
+
+  enforce_private_link_endpoint_network_policies = true
+}
+
+resource "azurerm_private_endpoint" "lacework" {
+  name                = "lacework-private-endpoint"
+  location            = azurerm_resource_group.lacework[0].location
+  resource_group_name = azurerm_resource_group.lacework[0].name
+  subnet_id           = azurerm_subnet.lacework.id
+
+  private_service_connection {
+    name                           = "lacework-privateserviceconnection"
+    is_manual_connection           = false
+    private_connection_resource_id = local.storage_account_id
+    subresource_names              = ["queue"]
+  }
+}
+
