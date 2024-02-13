@@ -21,7 +21,7 @@ locals {
   )
   diagnostic_settings_name = var.use_existing_diagnostic_settings ? var.diagnostic_settings_name : "${var.prefix}-${var.diagnostic_settings_name}-${random_id.uniq.hex}"
   version_file   = "${abspath(path.module)}/VERSION"
-  module_name    = "terrafrom-azure-activity-log"
+  module_name    = "terraform-azure-activity-log"
   module_version = fileexists(local.version_file) ? file(local.version_file) : ""
 }
 
