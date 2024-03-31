@@ -20,7 +20,7 @@ output "storage_account_name" {
   description = "The name of the centralized Storage Account for Activity Logs"
 }
 output "storage_account_resource_group" {
-  value       = local.storage_account_resource_group
+  value       = local.storage_account_resource_group_name
   description = "The resource group of the centralized Storage Account for Activity Logs"
 }
 output "subscription_ids" {
