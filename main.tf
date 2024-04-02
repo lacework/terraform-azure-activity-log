@@ -14,10 +14,15 @@ locals {
   storage_account_name = var.use_existing_storage_account ? var.storage_account_name : (
     length(var.storage_account_name) > 0 ? var.storage_account_name : substr("${var.prefix}storage${random_id.uniq.hex}", 0, 24)
   )
-  storage_account_resource_group = var.use_existing_storage_account ? (
+  storage_account_resource_group_name = var.use_existing_storage_account ? (
     data.azurerm_storage_account.lacework[0].resource_group_name
     ) : (
     azurerm_resource_group.lacework[0].name
+  )
+  storage_account_resource_group_location = var.use_existing_storage_account ? (
+    data.azurerm_storage_account.lacework[0].location
+    ) : (
+    azurerm_resource_group.lacework[0].location
   )
   diagnostic_settings_name = var.use_existing_diagnostic_settings ? var.diagnostic_settings_name : "${var.prefix}-${var.diagnostic_settings_name}-${random_id.uniq.hex}"
   version_file   = "${abspath(path.module)}/VERSION"
@@ -164,10 +169,10 @@ data "azurerm_subscriptions" "available" {}
 resource "azurerm_role_definition" "lacework" {
   name        = "${var.prefix}-role-${random_id.uniq.hex}"
   description = "Used by Lacework to monitor Activity Logs"
-  scope       = "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group}"
+  scope       = "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group_name}"
 
   assignable_scopes = [
-    "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group}"
+    "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group_name}"
   ]
 
   permissions {
@@ -191,7 +196,7 @@ resource "azurerm_role_definition" "lacework" {
 resource "azurerm_role_assignment" "lacework" {
   role_definition_id = azurerm_role_definition.lacework.role_definition_resource_id
   principal_id       = local.service_principal_id
-  scope              = "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group}"
+  scope              = "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group_name}"
 }
 
 # wait for X seconds for the Azure resources to be created
@@ -232,13 +237,13 @@ data "lacework_metric_module" "lwmetrics" {
 resource "azurerm_virtual_network" "lacework" {
   name                = "lacework-vnet"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.lacework[0].location
-  resource_group_name = azurerm_resource_group.lacework[0].name
+  location            = local.storage_account_resource_group_location
+  resource_group_name = local.storage_account_resource_group_name
 }
 
 resource "azurerm_subnet" "lacework" {
   name                 = "lacework-subnet"
-  resource_group_name  = azurerm_resource_group.lacework[0].name
+  resource_group_name  = local.storage_account_resource_group_name
   virtual_network_name = azurerm_virtual_network.lacework.name
   address_prefixes     = ["10.0.1.0/24"]
   service_endpoints    = ["Microsoft.Storage"]
@@ -248,8 +253,8 @@ resource "azurerm_subnet" "lacework" {
 
 resource "azurerm_private_endpoint" "lacework" {
   name                = "lacework-private-endpoint"
-  location            = azurerm_resource_group.lacework[0].location
-  resource_group_name = azurerm_resource_group.lacework[0].name
+  location            = local.storage_account_resource_group_location
+  resource_group_name = local.storage_account_resource_group_name
   subnet_id           = azurerm_subnet.lacework.id
 
   private_service_connection {
