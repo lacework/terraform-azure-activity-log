@@ -28,6 +28,7 @@ locals {
   version_file   = "${abspath(path.module)}/VERSION"
   module_name    = "terraform-azure-activity-log"
   module_version = fileexists(local.version_file) ? file(local.version_file) : ""
+  existing_subnet_id = var.use_existing_subnet ? var.existing_subnet_id : azurerm_subnet.lacework[0].id
 }
 
 module "az_ad_application" {
@@ -94,7 +95,7 @@ resource "azurerm_storage_account_network_rules" "lacework" {
   ip_rules           = concat(var.storage_account_network_rule_ip_rules,
   var.storage_account_network_rule_lacework_ip_rules)
 
-  virtual_network_subnet_ids = [azurerm_subnet.lacework.id]
+  virtual_network_subnet_ids = [local.existing_subnet_id]
 
   depends_on = [azurerm_storage_queue.lacework]
 }
@@ -235,6 +236,7 @@ data "lacework_metric_module" "lwmetrics" {
 
 # virtual network and subnet
 resource "azurerm_virtual_network" "lacework" {
+  count               = var.use_existing_subnet ? 0 : 1
   name                = "lacework-vnet"
   address_space       = ["10.0.0.0/16"]
   location            = local.storage_account_resource_group_location
@@ -242,9 +244,10 @@ resource "azurerm_virtual_network" "lacework" {
 }
 
 resource "azurerm_subnet" "lacework" {
+  count               = var.use_existing_subnet ? 0 : 1
   name                 = "lacework-subnet"
   resource_group_name  = local.storage_account_resource_group_name
-  virtual_network_name = azurerm_virtual_network.lacework.name
+  virtual_network_name = azurerm_virtual_network.lacework[0].name
   address_prefixes     = ["10.0.1.0/24"]
   service_endpoints    = ["Microsoft.Storage"]
 
@@ -255,7 +258,7 @@ resource "azurerm_private_endpoint" "lacework" {
   name                = "lacework-private-endpoint"
   location            = local.storage_account_resource_group_location
   resource_group_name = local.storage_account_resource_group_name
-  subnet_id           = azurerm_subnet.lacework.id
+  subnet_id           = local.existing_subnet_id
 
   private_service_connection {
     name                           = "lacework-privateserviceconnection"
@@ -264,4 +267,3 @@ resource "azurerm_private_endpoint" "lacework" {
     subresource_names              = ["queue"]
   }
 }
-
