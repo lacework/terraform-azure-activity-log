@@ -65,6 +65,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | <a name="input_application_name"></a> [application\_name](#input\_application\_name) | The name of the Azure Active Directory Application (required when use\_existing\_ad\_application is set to true) | `string` | `"lacework_security_audit"` | no |
 | <a name="input_application_password"></a> [application\_password](#input\_application\_password) | The Active Directory Application password to use (required when use\_existing\_ad\_application is set to true) | `string` | `""` | no |
 | <a name="input_diagnostic_settings_name"></a> [diagnostic\_settings\_name](#input\_diagnostic\_settings\_name) | The name of the subscription's Diagnostic Setting for Activity Logs (required when use\_existing\_diagnostic\_settings is set to true) | `string` | `"activity-logs"` | no |
+| <a name="input_existing_subnet_id"></a> [existing\_subnet\_id](#input\_existing\_subnet\_id) | Subnet ID for existing VNet to use for creating the private endpoint and/or storage account access rules | `string` | `""` | no |
 | <a name="input_infrastructure_encryption_enabled"></a> [infrastructure\_encryption\_enabled](#input\_infrastructure\_encryption\_enabled) | Enable Infrastructure Encryption for Azure Storage Account | `bool` | `false` | no |
 | <a name="input_lacework_integration_name"></a> [lacework\_integration\_name](#input\_lacework\_integration\_name) | The Lacework integration name | `string` | `"TF activity log"` | no |
 | <a name="input_location"></a> [location](#input\_location) | Azure region where the storage account for logging will reside | `string` | `"West US 2"` | no |
@@ -84,6 +85,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | <a name="input_use_existing_ad_application"></a> [use\_existing\_ad\_application](#input\_use\_existing\_ad\_application) | Set this to `true` to use an existing Active Directory Application | `bool` | `false` | no |
 | <a name="input_use_existing_diagnostic_settings"></a> [use\_existing\_diagnostic\_settings](#input\_use\_existing\_diagnostic\_settings) | Set this to `true` to use an existing Diagnostic Settings. Default behavior creates a new Diagnostic Settings | `bool` | `false` | no |
 | <a name="input_use_existing_storage_account"></a> [use\_existing\_storage\_account](#input\_use\_existing\_storage\_account) | Set this to `true` to use an existing Storage Account. Default behavior creates a new Storage Account | `bool` | `false` | no |
+| <a name="input_use_existing_subnet"></a> [use\_existing\_subnet](#input\_use\_existing\_subnet) | Set this to `true` to use an existing VNet Subnet ID. Default behavior creates a new VNet | `bool` | `false` | no |
 | <a name="input_use_storage_account_network_rules"></a> [use\_storage\_account\_network\_rules](#input\_use\_storage\_account\_network\_rules) | Enable configuration of azurerm\_storage\_account\_network\_rules resource | `bool` | `false` | no |
 | <a name="input_wait_time"></a> [wait\_time](#input\_wait\_time) | Amount of time to wait before the Lacework resources are provisioned | `string` | `"50s"` | no |
 

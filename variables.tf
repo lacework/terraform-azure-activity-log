@@ -23,6 +23,11 @@ variable "diagnostic_settings_name" {
   default     = "activity-logs"
   description = "The name of the subscription's Diagnostic Setting for Activity Logs (required when use_existing_diagnostic_settings is set to true)"
 }
+variable "existing_subnet_id" {
+  type        = string
+  default     = ""
+  description = "Subnet ID for existing VNet to use for creating the private endpoint and/or storage account access rules"
+}
 variable "use_existing_diagnostic_settings" {
   type        = bool
   default     = false
@@ -91,6 +96,12 @@ variable "use_existing_storage_account" {
   default     = false
   description = "Set this to `true` to use an existing Storage Account. Default behavior creates a new Storage Account"
 }
+variable "use_existing_subnet" {
+  type        = bool
+  default     = false
+  description = "Set this to `true` to use an existing VNet Subnet ID. Default behavior creates a new VNet"
+}
+
 variable "wait_time" {
   type        = string
   default     = "50s"
@@ -153,5 +164,3 @@ variable "storage_account_network_rule_lacework_ip_rules" {
   ]
   description = "List of allowed Lacework ip addresses. See https://docs.lacework.net/onboarding/lacework-outbound-ips#docusaurus_skipToContent_fallback. Requires `use_storage_account_network_rules` enabled."
 }
-
-
