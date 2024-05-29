@@ -25,10 +25,10 @@ locals {
     azurerm_resource_group.lacework[0].location
   )
   diagnostic_settings_name = var.use_existing_diagnostic_settings ? var.diagnostic_settings_name : "${var.prefix}-${var.diagnostic_settings_name}-${random_id.uniq.hex}"
-  version_file   = "${abspath(path.module)}/VERSION"
-  module_name    = "terraform-azure-activity-log"
-  module_version = fileexists(local.version_file) ? file(local.version_file) : ""
-  existing_subnet_id = var.use_existing_subnet ? var.existing_subnet_id : azurerm_subnet.lacework[0].id
+  version_file             = "${abspath(path.module)}/VERSION"
+  module_name              = "terraform-azure-activity-log"
+  module_version           = fileexists(local.version_file) ? file(local.version_file) : ""
+  existing_subnet_id       = var.use_existing_subnet ? var.existing_subnet_id : azurerm_subnet.lacework[0].id
 }
 
 module "az_ad_application" {
@@ -92,7 +92,7 @@ resource "azurerm_storage_account_network_rules" "lacework" {
   storage_account_id = local.storage_account_id
   default_action     = var.storage_account_network_rule_action
   bypass             = var.storage_account_network_rule_bypass
-  ip_rules           = concat(var.storage_account_network_rule_ip_rules,
+  ip_rules = concat(var.storage_account_network_rule_ip_rules,
   var.storage_account_network_rule_lacework_ip_rules)
 
   virtual_network_subnet_ids = [local.existing_subnet_id]
@@ -244,7 +244,7 @@ resource "azurerm_virtual_network" "lacework" {
 }
 
 resource "azurerm_subnet" "lacework" {
-  count               = var.use_existing_subnet ? 0 : 1
+  count                = var.use_existing_subnet ? 0 : 1
   name                 = "lacework-subnet"
   resource_group_name  = local.storage_account_resource_group_name
   virtual_network_name = azurerm_virtual_network.lacework[0].name
@@ -266,4 +266,9 @@ resource "azurerm_private_endpoint" "lacework" {
     private_connection_resource_id = local.storage_account_id
     subresource_names              = ["queue"]
   }
+}
+
+output "lacework_integration_guid" {
+  description = "GUID of the created Lacework integration"
+  value       = lacework_integration_azure_al.lacework.intg_guid
 }
