@@ -96,6 +96,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | <a name="output_application_id"></a> [application\_id](#output\_application\_id) | The Lacework AD Application id |
 | <a name="output_application_password"></a> [application\_password](#output\_application\_password) | The Lacework AD Application password |
 | <a name="output_diagnostic_settings_name"></a> [diagnostic\_settings\_name](#output\_diagnostic\_settings\_name) | The name of the subscription's Diagnostic Setting for Activity Logs |
+| <a name="output_lacework_integration_guid"></a> [lacework\_integration\_guid](#output\_lacework\_integration\_guid) | GUID of the created Lacework integration |
 | <a name="output_service_principal_id"></a> [service\_principal\_id](#output\_service\_principal\_id) | The Lacework Service Principal id |
 | <a name="output_storage_account_name"></a> [storage\_account\_name](#output\_storage\_account\_name) | The name of the centralized Storage Account for Activity Logs |
 | <a name="output_storage_account_resource_group"></a> [storage\_account\_resource\_group](#output\_storage\_account\_resource\_group) | The resource group of the centralized Storage Account for Activity Logs |
