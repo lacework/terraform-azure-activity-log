@@ -1,7 +1,7 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v2.2.5`.
+Another day, another release. These are the release notes for the version `v2.3.0`.
 
+## Features
+* feat(GROW-2917): add output for lacework integration guid (#115) (Matt Cadorette)([2774bd6](https://github.com/lacework/terraform-azure-activity-log/commit/2774bd6b40be2776d6a3c34e14dd30b456ea18e4))
 ## Other Changes
-* ci: update job name in test compat workflow (#111) (Timothy MacDonald)([4b8b55f](https://github.com/lacework/terraform-azure-activity-log/commit/4b8b55f487c8858daa2fb53c258ff7d530a40e97))
-* ci: version bump to v2.2.5-dev (Lacework)([9d95a50](https://github.com/lacework/terraform-azure-activity-log/commit/9d95a5040947a1649eb0bd585d11ec62b2f7bf65))
-* feat: use existing vnet/subnet (#113) (Brian Byers)([5ea5556](https://github.com/lacework/terraform-azure-activity-log/commit/5ea5556646b6ce9493ca661f6e6e6404a89ecc5d))
+* ci: version bump to v2.2.6-dev (Lacework)([8126588](https://github.com/lacework/terraform-azure-activity-log/commit/812658813a081f1dac00ba069984f367a237a27c))
