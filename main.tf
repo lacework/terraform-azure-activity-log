@@ -68,7 +68,7 @@ resource "azurerm_storage_account" "lacework" {
   account_kind                      = "StorageV2"
   account_tier                      = "Standard"
   account_replication_type          = "LRS"
-  enable_https_traffic_only         = true
+  https_traffic_only_enabled        = true
   location                          = var.location
   resource_group_name               = azurerm_resource_group.lacework[0].name
   tags                              = azurerm_resource_group.lacework[0].tags
@@ -238,7 +238,7 @@ data "lacework_metric_module" "lwmetrics" {
 resource "azurerm_virtual_network" "lacework" {
   count               = var.use_existing_subnet ? 0 : 1
   name                = "lacework-vnet"
-  address_space       = ["10.0.0.0/16"]
+  address_space       = var.virtual_network_address_space
   location            = local.storage_account_resource_group_location
   resource_group_name = local.storage_account_resource_group_name
 }
@@ -248,10 +248,10 @@ resource "azurerm_subnet" "lacework" {
   name                 = "lacework-subnet"
   resource_group_name  = local.storage_account_resource_group_name
   virtual_network_name = azurerm_virtual_network.lacework[0].name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = var.subnet_address_prefixes
   service_endpoints    = ["Microsoft.Storage"]
 
-  enforce_private_link_endpoint_network_policies = true
+  private_endpoint_network_policies  = var.private_endpoint_network_policies_enabled
 }
 
 resource "azurerm_private_endpoint" "lacework" {
