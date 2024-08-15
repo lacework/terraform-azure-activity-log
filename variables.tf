@@ -101,7 +101,16 @@ variable "use_existing_subnet" {
   default     = false
   description = "Set this to `true` to use an existing VNet Subnet ID. Default behavior creates a new VNet"
 }
-
+variable "subnet_address_prefixes" {
+  type        = list(string)
+  default     = ["10.0.1.0/24"]
+  description = "Limit the CIDR of the subnet"
+}
+variable "virtual_network_address_space" {
+  type        = list(string)
+  default     = ["10.0.0.0/16"]
+  description = "Adress space of the Storage Acount vNet"
+}
 variable "wait_time" {
   type        = string
   default     = "50s"
@@ -164,3 +173,9 @@ variable "storage_account_network_rule_lacework_ip_rules" {
   ]
   description = "List of allowed Lacework ip addresses. See https://docs.lacework.net/onboarding/lacework-outbound-ips#docusaurus_skipToContent_fallback. Requires `use_storage_account_network_rules` enabled."
 }
+variable "private_endpoint_network_policies_enabled" {
+  type        = string
+  default     = "Disabled"
+  description = "Enable or Disable network policies for the private endpoint on the subnet. Possible values are Disabled, Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults to Disabled"
+}
+

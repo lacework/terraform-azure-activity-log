@@ -14,7 +14,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.71 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.115 |
 | <a name="requirement_lacework"></a> [lacework](#requirement\_lacework) | ~> 1.18 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 2.1 |
 
@@ -88,6 +88,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | <a name="input_use_existing_subnet"></a> [use\_existing\_subnet](#input\_use\_existing\_subnet) | Set this to `true` to use an existing VNet Subnet ID. Default behavior creates a new VNet | `bool` | `false` | no |
 | <a name="input_use_storage_account_network_rules"></a> [use\_storage\_account\_network\_rules](#input\_use\_storage\_account\_network\_rules) | Enable configuration of azurerm\_storage\_account\_network\_rules resource | `bool` | `false` | no |
 | <a name="input_wait_time"></a> [wait\_time](#input\_wait\_time) | Amount of time to wait before the Lacework resources are provisioned | `string` | `"50s"` | no |
+| <a name="input_private_endpoint_network_policies"></a> [private\_endpoint\_network\_policies](#input\_private\_endpoint\_network\_policies) | Enable or Disable network policies for the private endpoint on the subnet. Possible values are `Disabled`, `Enabled`, `NetworkSecurityGroupEnabled` and `RouteTableEnabled`. Defaults to `Disabled`. | `string` | `Disabled` | no |
 
 ## Outputs
 
