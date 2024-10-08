@@ -13,7 +13,7 @@ provider "azurerm" {
 }
 module "az_activity_log_tenant_1" {
   source  = "lacework/activity-log/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   providers = {
     azurerm = azurerm.tenant_2
@@ -30,7 +30,7 @@ provider "azurerm" {
 }
 module "az_activity_log_tenant_2" {
   source  = "lacework/activity-log/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   providers = {
     azurerm = azurerm.tenant_2

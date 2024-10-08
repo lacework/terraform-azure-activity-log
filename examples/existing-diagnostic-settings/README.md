@@ -12,7 +12,7 @@ provider "lacework" {}
 
 module "az_activity_log" {
   source  = "lacework/activity-log/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   use_existing_diagnostic_settings = true
   diagnostic_settings_name = "diagnostic-settings-name"
