@@ -13,7 +13,7 @@ provider "lacework" {}
 
 module "az_activity_log" {
   source  = "lacework/activity-log/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   use_storage_account_network_rules = true
 
