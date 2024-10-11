@@ -31,7 +31,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_az_ad_application"></a> [az\_ad\_application](#module\_az\_ad\_application) | lacework/ad-application/azure | ~> 1.0 |
+| <a name="module_az_ad_application"></a> [az\_ad\_application](#module\_az\_ad\_application) | lacework/ad-application/azure | ~> 2.0 |
 
 ## Resources
 
