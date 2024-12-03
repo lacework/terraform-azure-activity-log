@@ -3,6 +3,7 @@ provider "lacework" {}
 # Tenant 1
 provider "azurerm" {
   tenant_id = "00000000-0000-0000-0000-000000000001"
+  subscription_id = "00000000-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
   alias     = "tenant_1"
   features {}
 }
