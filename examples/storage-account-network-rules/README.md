@@ -6,6 +6,7 @@ The following example shows configuring storage account network rules. Whenuse_s
 
 ```hcl
 provider "azurerm" {
+  subscription_id = "00000000-0000-0000-0000-000000000001"
   features {}
 }
 
