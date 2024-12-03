@@ -7,6 +7,7 @@ for Activity Log analysis using default values.
 
 ```hcl
 provider "azurerm" {
+  subscription_id = "00000000-0000-0000-0000-000000000001"
   features {}
 }
 
@@ -23,7 +24,7 @@ For detailed information on integrating Lacework with Azure, see [Azure Complian
 ## Selecting a different Subscription ID
 
 By default, all resources are provisioned to the default subscription of the Azure tenant. You can change
-that behavior by providing the `subscription_id` argument inside the `azurerm` provider, or by setting the 
+that behavior by providing the `subscription_id` argument inside the `azurerm` provider, or by setting the
 `ARM_SUBSCRIPTION_ID` environment variable.
 
 Here is an example of integrating a few subscriptions and selecting a different subscription from the default

@@ -5,6 +5,7 @@ single Azure tenant with Lacework for Activity Log analysis.
 
 ```hcl
 provider "azurerm" {
+  subscription_id = "00000000-0000-0000-0000-000000000001"
   features {}
 }
 
