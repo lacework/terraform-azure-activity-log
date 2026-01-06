@@ -71,7 +71,7 @@ resource "azurerm_storage_account" "lacework" {
   https_traffic_only_enabled        = true
   location                          = var.location
   resource_group_name               = azurerm_resource_group.lacework[0].name
-  tags                              = azurerm_resource_group.lacework[0].tags
+  tags                              = var.tags
   min_tls_version                   = "TLS1_2"
   infrastructure_encryption_enabled = var.infrastructure_encryption_enabled
   allow_nested_items_to_be_public   = false
