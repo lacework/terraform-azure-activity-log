@@ -151,11 +151,12 @@ variable "storage_account_network_rule_lacework_ip_rules" {
   default     = [
     # US
     "34.208.85.38",
+    "35.93.121.192/26",
+    "35.95.82.0/26",
     "35.165.121.10",
     "35.165.62.149",
     "35.165.83.150",
     "35.166.181.157",
-    "35.93.121.192/26",
     "44.231.201.69",
     "52.42.2.33",
     "52.43.197.121",
@@ -169,9 +170,17 @@ variable "storage_account_network_rule_lacework_ip_rules" {
     "18.184.141.112",
     "18.193.166.115",
     # APAC
-    "3.27.79.192/26"
+    "3.27.79.192/26",
+    "54.79.135.186",
+    "54.66.98.157",
+    "13.54.191.160",
+    # Singapore
+    "18.99.45.128/26",
+    "18.140.103.40",
+    "47.130.81.233",
+    "54.179.201.12"
   ]
-  description = "List of allowed Lacework ip addresses. See https://docs.lacework.net/onboarding/lacework-outbound-ips#docusaurus_skipToContent_fallback. Requires `use_storage_account_network_rules` enabled."
+  description = "List of allowed Lacework ip addresses. See https://docs.fortinet.com/document/forticnapp/latest/administration-guide/264821/appendix-a-inbound-and-outbound-connections. Requires `use_storage_account_network_rules` enabled."
 }
 variable "private_endpoint_network_policies_enabled" {
   type        = string
