@@ -75,14 +75,17 @@ resource "azurerm_storage_account" "lacework" {
   min_tls_version                   = "TLS1_2"
   infrastructure_encryption_enabled = var.infrastructure_encryption_enabled
   allow_nested_items_to_be_public   = false
-  queue_properties {
-    logging {
-      delete                = true
-      read                  = true
-      write                 = true
-      version               = "1.0"
-      retention_policy_days = var.log_retention_days
-    }
+}
+
+resource "azurerm_storage_account_queue_properties" "lacework" {
+  count              = var.use_existing_storage_account ? 0 : 1
+  storage_account_id = azurerm_storage_account.lacework[0].id
+  logging {
+    delete                = true
+    read                  = true
+    write                 = true
+    version               = "1.0"
+    retention_policy_days = var.log_retention_days
   }
 }
 
@@ -97,16 +100,12 @@ resource "azurerm_storage_account_network_rules" "lacework" {
 
   virtual_network_subnet_ids = [local.existing_subnet_id]
 
-  depends_on = [azurerm_storage_queue.lacework]
+  depends_on = [azurerm_storage_queue.lacework, azurerm_storage_account_queue_properties.lacework]
 }
 
 resource "azurerm_storage_queue" "lacework" {
-  name = "${var.prefix}-queue-${random_id.uniq.hex}"
-  storage_account_name = var.use_existing_storage_account ? (
-    data.azurerm_storage_account.lacework[0].name
-    ) : (
-    azurerm_storage_account.lacework[0].name
-  )
+  name               = "${var.prefix}-queue-${random_id.uniq.hex}"
+  storage_account_id = local.storage_account_id
 }
 
 resource "azurerm_eventgrid_event_subscription" "lacework" {
@@ -249,9 +248,12 @@ resource "azurerm_subnet" "lacework" {
   resource_group_name  = local.storage_account_resource_group_name
   virtual_network_name = azurerm_virtual_network.lacework[0].name
   address_prefixes     = var.subnet_address_prefixes
-  service_endpoints    = ["Microsoft.Storage"]
 
-  private_endpoint_network_policies  = var.private_endpoint_network_policies_enabled
+  service_endpoint {
+    service = "Microsoft.Storage"
+  }
+
+  private_endpoint_network_policies = var.private_endpoint_network_policies_enabled
 }
 
 resource "azurerm_private_endpoint" "lacework" {

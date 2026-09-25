@@ -147,8 +147,8 @@ variable "storage_account_network_rule_ip_rules" {
   description = "List of allowed ip addresses. Requires `use_storage_account_network_rules` enabled."
 }
 variable "storage_account_network_rule_lacework_ip_rules" {
-  type        = list(string)
-  default     = [
+  type = list(string)
+  default = [
     # US
     "34.208.85.38",
     "35.93.121.192/26",
