@@ -15,7 +15,7 @@ provider "lacework" {}
 
 module "az_activity_log" {
   source                    = "lacework/activity-log/azure"
-  version                   = "~> 3.0"
+  version                   = "~> 4.0"
   application_name          = "my-custom-application-name"
   lacework_integration_name = "custom name"
   prefix                    = "customprefix"

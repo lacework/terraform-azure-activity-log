@@ -8,13 +8,21 @@
 Terraform module for configuring an integration with Azure Subscriptions and Tenants for Activity Log analysis.
 It configures a Diagnostic Setting that puts logs in an storage account, from which Lacework will read Activity Logs.
 
+## Upgrading to v4
+
+v4 requires azurerm `>= 5.1, < 6.0` (5.0.x cannot migrate the storage queue state written by v3).
+
+1. Run `terraform init -upgrade`, then `terraform plan`. Expect `azurerm_storage_account_queue_properties.lacework` to be added and 0 to destroy.
+2. azurerm 5.x no longer registers Resource Providers by default. Register `Microsoft.EventGrid`, `Microsoft.Network`, `Microsoft.Storage` and `microsoft.insights` in the subscription, or list them (exact casing) in the provider's `resource_providers_to_register`.
+3. With `use_existing_storage_account = true`, `storage_account_resource_group` must match the resource group's exact casing in Azure. Otherwise the plan replaces `azurerm_storage_queue.lacework`; fix the casing before applying.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 4.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 5.1 |
 | <a name="requirement_lacework"></a> [lacework](#requirement\_lacework) | ~> 2.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 2.1 |
 
@@ -22,7 +30,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 4.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 5.1 |
 | <a name="provider_lacework"></a> [lacework](#provider\_lacework) | ~> 2.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | >= 2.1 |
 | <a name="provider_time"></a> [time](#provider\_time) | n/a |
@@ -45,6 +53,7 @@ It configures a Diagnostic Setting that puts logs in an storage account, from wh
 | [azurerm_role_definition.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition) | resource |
 | [azurerm_storage_account.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_storage_account_network_rules.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules) | resource |
+| [azurerm_storage_account_queue_properties.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_queue_properties) | resource |
 | [azurerm_storage_queue.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_queue) | resource |
 | [azurerm_subnet.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
 | [azurerm_virtual_network.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network) | resource |
