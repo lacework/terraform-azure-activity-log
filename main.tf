@@ -199,6 +199,30 @@ resource "azurerm_role_assignment" "lacework" {
   scope              = "${data.azurerm_subscription.primary.id}/resourceGroups/${local.storage_account_resource_group_name}"
 }
 
+# Lacework names each subscription's Activity Logs from the subscriptions this service principal can list;
+# a subscription it has no role on is left out, and its logs arrive without a subscription name.
+resource "azurerm_role_definition" "subscription_reader" {
+  name        = "${var.prefix}-subscription-reader-${random_id.uniq.hex}"
+  description = "Used by Lacework to read the names of the subscriptions it collects Activity Logs from"
+  scope       = data.azurerm_subscription.primary.id
+
+  assignable_scopes = distinct(concat(
+    [data.azurerm_subscription.primary.id],
+    [for id in local.subscription_ids : "/subscriptions/${id}"]
+  ))
+
+  permissions {
+    actions = ["Microsoft.Resources/subscriptions/read"]
+  }
+}
+
+resource "azurerm_role_assignment" "subscription_reader" {
+  for_each           = toset(local.subscription_ids)
+  role_definition_id = azurerm_role_definition.subscription_reader.role_definition_resource_id
+  principal_id       = local.service_principal_id
+  scope              = "/subscriptions/${each.value}"
+}
+
 # wait for X seconds for the Azure resources to be created
 resource "time_sleep" "wait_time" {
   create_duration = var.wait_time
@@ -206,7 +230,8 @@ resource "time_sleep" "wait_time" {
     azurerm_eventgrid_event_subscription.lacework,
     azurerm_storage_queue.lacework,
     azurerm_monitor_diagnostic_setting.lacework,
-    azurerm_role_assignment.lacework
+    azurerm_role_assignment.lacework,
+    azurerm_role_assignment.subscription_reader
   ]
   triggers = {
     # If App ID changes, trigger a wait between lacework_integration_azure_al destroys and re-creates, to avoid API errors

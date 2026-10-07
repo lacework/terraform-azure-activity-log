@@ -16,6 +16,12 @@ v4 requires azurerm `>= 5.1, < 6.0` (5.0.x cannot migrate the storage queue stat
 2. azurerm 5.x no longer registers Resource Providers by default. Register `Microsoft.EventGrid`, `Microsoft.Network`, `Microsoft.Storage` and `microsoft.insights` in the subscription, or list them (exact casing) in the provider's `resource_providers_to_register`.
 3. With `use_existing_storage_account = true`, `storage_account_resource_group` must match the resource group's exact casing in Azure. Otherwise the plan replaces `azurerm_storage_queue.lacework`; fix the casing before applying.
 
+## Subscription names
+
+Lacework names each Activity Log event's subscription using the subscriptions the integration's service principal can list. The module therefore gives the service principal a custom role on every subscription it collects logs from (`subscription_ids`, or every subscription with `all_subscriptions`). The role only allows `Microsoft.Resources/subscriptions/read`. Without it, events from any subscription other than the primary one arrive without a subscription name.
+
+The identity running Terraform needs permission to create role definitions and role assignments (for example, User Access Administrator or Owner) on each of those subscriptions.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -50,7 +56,9 @@ v4 requires azurerm `>= 5.1, < 6.0` (5.0.x cannot migrate the storage queue stat
 | [azurerm_private_endpoint.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
 | [azurerm_resource_group.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_role_assignment.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.subscription_reader](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_definition.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition) | resource |
+| [azurerm_role_definition.subscription_reader](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition) | resource |
 | [azurerm_storage_account.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_storage_account_network_rules.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules) | resource |
 | [azurerm_storage_account_queue_properties.lacework](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_queue_properties) | resource |
