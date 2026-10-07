@@ -217,8 +217,11 @@ resource "azurerm_role_definition" "subscription_reader" {
 }
 
 resource "azurerm_role_assignment" "subscription_reader" {
-  for_each           = toset(local.subscription_ids)
-  role_definition_id = azurerm_role_definition.subscription_reader.role_definition_resource_id
+  for_each = toset(local.subscription_ids)
+  # Azure reports the definition under the assignment's subscription, so the primary-subscription
+  # role_definition_resource_id would force a replacement on every plan
+  # (hashicorp/terraform-provider-azurerm#4847).
+  role_definition_id = "/subscriptions/${each.value}/providers/Microsoft.Authorization/roleDefinitions/${azurerm_role_definition.subscription_reader.role_definition_id}"
   principal_id       = local.service_principal_id
   scope              = "/subscriptions/${each.value}"
 }
